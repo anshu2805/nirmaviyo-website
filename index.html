@@ -3,178 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nirmaviyo — Digital presence, automated</title>
+<title>Nirmaviyo — Your site, wired to sell</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #0B0F1D;
-    --bg-panel: #121a30;
-    --bg-panel-2: #1a2440;
-    --gold: #E8A33D;
-    --teal: #4ED9C5;
-    --text: #F3F1EA;
-    --muted: #8C93AC;
-    --border: rgba(243,241,234,0.09);
-    --border-strong: rgba(243,241,234,0.16);
+    --navy: #14224E;
+    --purple: #7B2FF7;
+    --cyan: #17D3E0;
+    --pink: #FF4FA6;
+    --bg: #FAF9F5;
+    --panel: #FFFFFF;
+    --ink: #2A2B2F;
+    --muted: #6A6C77;
+    --border: rgba(20,34,78,0.12);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Inter', sans-serif;
+    background:var(--bg); color:var(--ink);
+    font-family:'Work Sans', sans-serif;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
   @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important;}
   }
-  h1,h2,h3,.display{ font-family:'Space Grotesk', sans-serif; letter-spacing:-0.01em; }
-  .mono{ font-family:'IBM Plex Mono', monospace; letter-spacing:0.02em; }
+  h1,h2,h3,.display{ font-family:'Plus Jakarta Sans', sans-serif; letter-spacing:-0.01em; }
+  .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:0.01em; }
   a{ color:inherit; text-decoration:none; }
-  img,svg{ display:block; max-width:100%; }
   .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
   @media (max-width:640px){ .wrap{ padding:0 20px; } }
 
-  /* background texture */
-  .bg-grid{
-    position:fixed; inset:0; z-index:0; pointer-events:none;
-    background-image:
-      radial-gradient(ellipse 900px 500px at 15% -5%, rgba(78,217,197,0.08), transparent 60%),
-      radial-gradient(ellipse 700px 500px at 105% 10%, rgba(232,163,61,0.07), transparent 60%);
+  .bg-orbit{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .bg-orbit::before, .bg-orbit::after{
+    content:''; position:absolute; border-radius:50%; filter:blur(70px); opacity:0.28;
   }
+  .bg-orbit::before{ width:520px; height:520px; background:var(--purple); top:-160px; right:-120px; }
+  .bg-orbit::after{ width:420px; height:420px; background:var(--cyan); bottom:-140px; left:-100px; opacity:0.2; }
 
-  /* NAV */
-  header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(11,15,29,0.82);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--border);
-  }
+  header{ position:sticky; top:0; z-index:50; background:rgba(250,249,245,0.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
   nav{ display:flex; align-items:center; justify-content:space-between; padding:20px 0; }
-  .logo{ font-family:'Space Grotesk'; font-weight:700; font-size:1.25rem; display:flex; align-items:center; gap:9px; }
-  .logo-mark{ width:9px; height:9px; border-radius:50%; background:var(--gold); box-shadow:0 0 12px var(--gold); }
-  .nav-links{ display:flex; gap:36px; font-size:0.9rem; color:var(--muted); }
-  .nav-links a{ transition:color .2s; }
-  .nav-links a:hover, .nav-links a:focus-visible{ color:var(--text); outline:none; }
-  .nav-cta{
-    font-size:0.85rem; font-weight:500; padding:10px 20px; border-radius:100px;
-    background:var(--text); color:var(--bg); transition:transform .2s, opacity .2s;
-  }
-  .nav-cta:hover{ opacity:0.88; transform:translateY(-1px); }
+  .logo{ font-weight:800; font-size:1.2rem; color:var(--navy); display:flex; align-items:center; gap:8px; }
+  .logo-mark{ width:10px; height:10px; border-radius:3px; background:var(--pink); transform:rotate(45deg); }
+  .nav-links{ display:flex; gap:34px; font-size:0.9rem; color:var(--muted); }
+  .nav-links a:hover{ color:var(--navy); }
+  .nav-cta{ font-size:0.85rem; font-weight:700; padding:11px 22px; border-radius:100px; background:var(--navy); color:#fff; transition:transform .2s, background .2s; }
+  .nav-cta:hover{ transform:translateY(-1px); background:var(--purple); }
   @media (max-width:780px){ .nav-links{ display:none; } }
 
   /* HERO */
-  .hero{ position:relative; padding:100px 0 60px; z-index:1; }
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px;
-    font-size:0.78rem; color:var(--teal); text-transform:uppercase;
-    padding:6px 14px; border:1px solid rgba(78,217,197,0.3); border-radius:100px;
-    margin-bottom:28px; background:rgba(78,217,197,0.06);
-  }
-  h1.hero-title{
-    font-size:clamp(2.4rem, 5.4vw, 4.4rem);
-    line-height:1.05; font-weight:600; max-width:14ch;
-    margin-bottom:26px;
-  }
-  h1.hero-title em{ font-style:normal; color:var(--gold); }
-  .hero-sub{
-    font-size:1.15rem; color:var(--muted); max-width:46ch; line-height:1.6; margin-bottom:38px;
-  }
-  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:80px; }
-  .btn-primary{
-    background:var(--gold); color:#1a1204; font-weight:600; padding:14px 28px;
-    border-radius:100px; font-size:0.95rem; transition:transform .2s, box-shadow .2s;
-    box-shadow:0 0 0 rgba(232,163,61,0);
-  }
-  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 8px 24px rgba(232,163,61,0.25); }
-  .btn-secondary{
-    border:1px solid var(--border-strong); padding:14px 28px; border-radius:100px;
-    font-size:0.95rem; color:var(--text); transition:border-color .2s, background .2s;
-  }
-  .btn-secondary:hover{ border-color:var(--teal); background:rgba(78,217,197,0.06); }
+  .hero{ position:relative; z-index:1; padding:100px 0 30px; }
+  .eyebrow{ display:inline-flex; align-items:center; gap:8px; font-size:0.78rem; font-weight:600; color:var(--purple); text-transform:uppercase; padding:6px 14px; border:1px solid rgba(123,47,247,0.28); border-radius:100px; margin-bottom:28px; background:rgba(123,47,247,0.06); }
+  h1.hero-title{ font-size:clamp(2.5rem,5.6vw,4.5rem); font-weight:800; line-height:1.06; color:var(--navy); max-width:15ch; margin-bottom:24px; }
+  h1.hero-title .hl{ color:var(--pink); }
+  .hero-sub{ font-size:1.15rem; color:var(--muted); max-width:46ch; line-height:1.6; margin-bottom:36px; }
+  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:70px; }
+  .btn-primary{ background:var(--navy); color:#fff; font-weight:700; padding:15px 28px; border-radius:100px; font-size:0.95rem; transition:transform .2s, background .2s; }
+  .btn-primary:hover{ background:var(--purple); transform:translateY(-2px); }
+  .btn-secondary{ border:1.5px solid var(--border); padding:14px 28px; border-radius:100px; font-size:0.95rem; font-weight:600; color:var(--navy); transition:border-color .2s, background .2s; }
+  .btn-secondary:hover{ border-color:var(--cyan); background:rgba(23,211,224,0.08); }
 
-  /* SIGNATURE FLOW DIAGRAM */
-  .flow-wrap{ position:relative; width:100%; padding:20px 0 10px; }
-  .flow-svg{ width:100%; height:auto; }
-  .flow-path{
-    fill:none; stroke:url(#flowGrad); stroke-width:2; stroke-dasharray:6 8;
-    animation:dash 22s linear infinite;
-  }
-  @keyframes dash{ to{ stroke-dashoffset:-400; } }
-  .flow-node circle.dot{ fill:var(--bg); stroke-width:2; }
-  .flow-node text{ font-family:'IBM Plex Mono', monospace; fill:var(--muted); }
-  .flow-node .node-label{ font-family:'Space Grotesk', sans-serif; fill:var(--text); font-weight:600; }
-  .flow-pulse{ animation:pulse 2.6s ease-in-out infinite; }
-  @keyframes pulse{ 0%,100%{ opacity:0.35; r:5; } 50%{ opacity:1; r:7.5; } }
+  /* ORBIT DIAGRAM */
+  .orbit-wrap{ position:relative; width:100%; padding:10px 0 30px; }
+  .orbit-svg{ width:100%; height:auto; }
+  .orbit-ring{ fill:none; stroke:var(--border); stroke-width:1.4; }
+  .orbit-arc{ fill:none; stroke-width:2.4; stroke-linecap:round; }
+  .orbit-node-label{ font-family:'Plus Jakarta Sans'; font-weight:700; fill:var(--navy); }
+  .orbit-node-sub{ font-family:'JetBrains Mono'; fill:var(--muted); }
+  .spin-slow{ animation:spin 40s linear infinite; transform-origin:600px 170px; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
 
-  /* POSITIONING STRIP */
-  .position-strip{
-    border-top:1px solid var(--border); border-bottom:1px solid var(--border);
-    padding:52px 0; position:relative; z-index:1;
-  }
-  .position-grid{ display:grid; grid-template-columns:1fr 1.4fr; gap:48px; align-items:start; }
-  @media (max-width:780px){ .position-grid{ grid-template-columns:1fr; gap:20px; } }
-  .position-old{ color:var(--muted); font-size:1rem; }
-  .position-old .strike{ text-decoration:line-through; text-decoration-color:rgba(140,147,172,0.5); }
-  .position-new{ font-size:1.5rem; line-height:1.35; font-family:'Space Grotesk'; font-weight:500; }
-  .position-new .accent{ color:var(--gold); }
+  /* PLEDGE */
+  .pledge{ border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:52px 0; position:relative; z-index:1; background:var(--panel); }
+  .pledge-grid{ display:grid; grid-template-columns:1fr 1.4fr; gap:48px; align-items:start; }
+  @media (max-width:780px){ .pledge-grid{ grid-template-columns:1fr; gap:18px; } }
+  .pledge-old{ color:var(--muted); font-size:1rem; }
+  .pledge-old .strike{ text-decoration:line-through; text-decoration-color:rgba(106,108,119,0.5); }
+  .pledge-new{ font-size:1.5rem; line-height:1.4; font-weight:700; color:var(--navy); }
+  .pledge-new .accent{ color:var(--pink); }
+  .pledge-new .accent2{ color:var(--cyan); }
 
-  /* SERVICES */
+  /* SECTIONS */
   .section{ padding:110px 0; position:relative; z-index:1; }
   .section-head{ margin-bottom:56px; max-width:60ch; }
-  .section-eyebrow{ color:var(--teal); font-size:0.8rem; text-transform:uppercase; margin-bottom:14px; display:block; }
-  .section-title{ font-size:clamp(1.8rem,3.4vw,2.6rem); font-weight:600; margin-bottom:14px; }
+  .section-eyebrow{ color:var(--purple); font-size:0.8rem; font-weight:700; text-transform:uppercase; margin-bottom:14px; display:block; letter-spacing:0.03em; }
+  .section-title{ font-size:clamp(1.85rem,3.4vw,2.6rem); font-weight:800; color:var(--navy); margin-bottom:14px; }
   .section-desc{ color:var(--muted); font-size:1.05rem; line-height:1.6; }
 
-  .service-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:18px; overflow:hidden; }
-  @media (max-width:780px){ .service-grid{ grid-template-columns:1fr; } }
-  .service-card{ background:var(--bg-panel); padding:40px; transition:background .25s; }
-  .service-card:hover{ background:var(--bg-panel-2); }
-  .service-icon{ width:38px; height:38px; margin-bottom:22px; }
-  .service-card h3{ font-size:1.3rem; margin-bottom:12px; font-weight:600; }
-  .service-card p.desc{ color:var(--muted); font-size:0.95rem; margin-bottom:20px; line-height:1.55; }
-  .service-list{ list-style:none; display:flex; flex-wrap:wrap; gap:8px; }
-  .service-list li{
-    font-size:0.78rem; color:var(--text); background:rgba(243,241,234,0.05);
-    border:1px solid var(--border); padding:6px 12px; border-radius:100px;
-  }
+  .service-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  @media (max-width:980px){ .service-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .service-grid{ grid-template-columns:1fr; } }
+  .service-card{ background:var(--panel); border:1px solid var(--border); border-radius:18px; padding:32px 26px; transition:transform .22s, box-shadow .22s, border-color .22s; }
+  .service-card:hover{ transform:translateY(-5px); box-shadow:0 16px 34px rgba(20,34,78,0.08); }
+  .service-card .dot{ width:34px; height:34px; border-radius:9px; margin-bottom:20px; }
+  .dot-1{ background:var(--navy); }
+  .dot-2{ background:var(--purple); }
+  .dot-3{ background:var(--cyan); }
+  .dot-4{ background:var(--pink); }
+  .service-card h3{ font-size:1.2rem; font-weight:700; color:var(--navy); margin-bottom:10px; }
+  .service-card p{ color:var(--muted); font-size:0.92rem; line-height:1.55; margin-bottom:18px; }
+  .service-tags{ display:flex; flex-wrap:wrap; gap:7px; }
+  .service-tags span{ font-size:0.74rem; background:var(--bg); border:1px solid var(--border); padding:5px 11px; border-radius:100px; color:var(--ink); }
 
-  /* JOURNEY / PROCESS */
-  .journey-steps{ display:flex; flex-direction:column; border-left:1px solid var(--border-strong); margin-left:14px; }
-  .journey-step{ position:relative; padding:0 0 52px 40px; }
+  /* JOURNEY */
+  .journey-rail{ display:flex; flex-direction:column; border-left:2px solid var(--border); margin-left:14px; }
+  .journey-step{ position:relative; padding:0 0 50px 40px; }
   .journey-step:last-child{ padding-bottom:0; }
   .journey-step::before{
-    content:attr(data-n); position:absolute; left:-15px; top:0;
-    width:29px; height:29px; border-radius:50%; background:var(--bg);
-    border:1px solid var(--teal); color:var(--teal); font-family:'IBM Plex Mono';
-    font-size:0.75rem; display:flex; align-items:center; justify-content:center;
+    content:attr(data-n); position:absolute; left:-17px; top:0; width:32px; height:32px; border-radius:50%;
+    background:var(--panel); border:2px solid var(--cyan); color:var(--navy); font-family:'JetBrains Mono'; font-weight:700;
+    font-size:0.78rem; display:flex; align-items:center; justify-content:center;
   }
-  .journey-step h4{ font-size:1.15rem; margin-bottom:8px; font-weight:600; }
+  .journey-step h4{ font-size:1.15rem; font-weight:700; color:var(--navy); margin-bottom:8px; }
   .journey-step p{ color:var(--muted); font-size:0.95rem; line-height:1.55; max-width:56ch; }
 
   /* FOCUS */
-  .focus-panel{
-    background:linear-gradient(155deg, var(--bg-panel), var(--bg-panel-2));
-    border:1px solid var(--border-strong); border-radius:20px; padding:52px;
-  }
+  .focus-panel{ background:linear-gradient(120deg, var(--navy), #241a5e); border-radius:22px; padding:52px; color:#fff; }
   @media (max-width:640px){ .focus-panel{ padding:32px 24px; } }
-  .focus-title{ font-size:1.6rem; font-weight:600; margin-bottom:10px; }
-  .focus-sub{ color:var(--muted); margin-bottom:32px; max-width:56ch; }
+  .focus-title{ font-size:1.6rem; font-weight:800; margin-bottom:10px; }
+  .focus-sub{ color:rgba(255,255,255,0.72); margin-bottom:32px; max-width:56ch; }
   .focus-pills{ display:flex; flex-wrap:wrap; gap:12px; }
-  .focus-pill{
-    display:flex; align-items:center; gap:10px; font-size:0.92rem; font-weight:500;
-    background:rgba(232,163,61,0.09); border:1px solid rgba(232,163,61,0.28);
-    color:var(--text); padding:10px 18px; border-radius:100px;
-  }
-  .focus-pill .num{ color:var(--gold); font-family:'IBM Plex Mono'; font-size:0.78rem; }
+  .focus-pill{ display:flex; align-items:center; gap:10px; font-size:0.92rem; font-weight:600; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.24); color:#fff; padding:10px 18px; border-radius:100px; }
+  .focus-pill .num{ color:var(--cyan); font-family:'JetBrains Mono'; font-size:0.78rem; }
 
-  /* CTA / FOOTER */
+  /* CTA */
   .cta-section{ text-align:center; padding:120px 0 100px; position:relative; z-index:1; }
-  .cta-section h2{ font-size:clamp(2rem,4vw,3rem); font-weight:600; max-width:18ch; margin:0 auto 20px; }
+  .cta-section h2{ font-size:clamp(2rem,4vw,3rem); font-weight:800; color:var(--navy); max-width:18ch; margin:0 auto 20px; }
+  .cta-section h2 .hl{ color:var(--pink); }
   .cta-section p{ color:var(--muted); max-width:48ch; margin:0 auto 36px; font-size:1.05rem; }
+
   footer{ border-top:1px solid var(--border); padding:40px 0; position:relative; z-index:1; }
   .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
   .footer-row .mono{ font-size:0.82rem; color:var(--muted); }
@@ -182,7 +141,7 @@
 </head>
 <body>
 
-<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-orbit" aria-hidden="true"></div>
 
 <header>
   <div class="wrap">
@@ -202,63 +161,56 @@
   <section class="hero">
     <div class="wrap">
       <span class="eyebrow mono">Web development · Email marketing · Automation</span>
-      <h1 class="hero-title">We build your digital presence and <em>automate</em> the journey that turns visitors into customers.</h1>
-      <p class="hero-sub">Nirmaviyo designs the website, writes the emails, and connects the two — so every visitor is guided, automatically, toward becoming a customer who comes back.</p>
+      <h1 class="hero-title">Your website, wired to <span class="hl">keep selling</span> after the visit ends.</h1>
+      <p class="hero-sub">Nirmaviyo designs the site, writes the emails, and connects the two into one automated system — so every visitor is followed up with, without anyone lifting a finger.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn-primary">Start a project</a>
         <a href="#services" class="btn-secondary">See what we do</a>
       </div>
 
-      <div class="flow-wrap" role="img" aria-label="Diagram showing a visitor moving through a website, signing up for email, entering an automated flow, and becoming a repeat customer">
-        <svg class="flow-svg" viewBox="0 0 1180 220" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="flowGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#4ED9C5"/>
-              <stop offset="55%" stop-color="#E8A33D"/>
-              <stop offset="100%" stop-color="#4ED9C5"/>
-            </linearGradient>
-          </defs>
-          <path class="flow-path" d="M40,150 C 200,150 220,60 340,60 S 480,150 590,150 S 730,60 840,60 S 980,150 1140,150"/>
+      <div class="orbit-wrap" role="img" aria-label="Diagram showing website, email, and automation orbiting a customer at the center">
+        <svg class="orbit-svg" viewBox="0 0 1180 340" xmlns="http://www.w3.org/2000/svg">
+          <circle class="orbit-ring" cx="600" cy="170" r="110"/>
+          <circle class="orbit-ring" cx="600" cy="170" r="58"/>
+          <g class="spin-slow">
+            <path class="orbit-arc" d="M600,60 A110,110 0 0 1 698,121" stroke="#7B2FF7"/>
+            <path class="orbit-arc" d="M698,219 A110,110 0 0 1 600,280" stroke="#17D3E0"/>
+            <path class="orbit-arc" d="M502,219 A110,110 0 0 1 502,121" stroke="#FF4FA6"/>
+          </g>
+          <circle cx="600" cy="170" r="33" fill="#14224E"/>
+          <text x="600" y="166" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans" font-weight="700" font-size="12">Your</text>
+          <text x="600" y="181" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans" font-weight="700" font-size="12">customer</text>
 
-          <g class="flow-node">
-            <circle class="dot" cx="40" cy="150" r="7" stroke="#4ED9C5"/>
-            <circle class="flow-pulse" cx="40" cy="150" r="5" fill="#4ED9C5"/>
-            <text x="40" y="182" text-anchor="middle" font-size="11">01</text>
-            <text class="node-label" x="40" y="199" text-anchor="middle" font-size="12">Visitor</text>
+          <g>
+            <circle cx="600" cy="60" r="7" fill="#7B2FF7"/>
+            <text class="orbit-node-label" x="600" y="38" text-anchor="middle" font-size="13">Website</text>
           </g>
-          <g class="flow-node">
-            <circle class="dot" cx="340" cy="60" r="7" stroke="#E8A33D"/>
-            <text x="340" y="92" text-anchor="middle" font-size="11">02</text>
-            <text class="node-label" x="340" y="109" text-anchor="middle" font-size="12">Website / landing page</text>
+          <g>
+            <circle cx="910" cy="170" r="7" fill="#17D3E0"/>
+            <text class="orbit-node-label" x="955" y="166" text-anchor="middle" font-size="13">Email</text>
+            <text class="orbit-node-sub" x="955" y="184" text-anchor="middle" font-size="10">flows</text>
           </g>
-          <g class="flow-node">
-            <circle class="dot" cx="590" cy="150" r="7" stroke="#4ED9C5"/>
-            <text x="590" y="182" text-anchor="middle" font-size="11">03</text>
-            <text class="node-label" x="590" y="199" text-anchor="middle" font-size="12">Email signup</text>
+          <g>
+            <circle cx="600" cy="280" r="7" fill="#17D3E0"/>
+            <text class="orbit-node-label" x="600" y="308" text-anchor="middle" font-size="13">Automation</text>
           </g>
-          <g class="flow-node">
-            <circle class="dot" cx="840" cy="60" r="7" stroke="#E8A33D"/>
-            <text x="840" y="92" text-anchor="middle" font-size="11">04</text>
-            <text class="node-label" x="840" y="109" text-anchor="middle" font-size="12">Automated flow</text>
-          </g>
-          <g class="flow-node">
-            <circle class="dot" cx="1140" cy="150" r="7" stroke="#E8A33D"/>
-            <circle class="flow-pulse" cx="1140" cy="150" r="5" fill="#E8A33D"/>
-            <text x="1140" y="182" text-anchor="middle" font-size="11">05</text>
-            <text class="node-label" x="1140" y="199" text-anchor="middle" font-size="12">Repeat customer</text>
+          <g>
+            <circle cx="290" cy="170" r="7" fill="#FF4FA6"/>
+            <text class="orbit-node-label" x="225" y="166" text-anchor="middle" font-size="13">Growth</text>
+            <text class="orbit-node-sub" x="225" y="184" text-anchor="middle" font-size="10">tracked</text>
           </g>
         </svg>
       </div>
     </div>
   </section>
 
-  <section class="position-strip">
-    <div class="wrap position-grid">
-      <div class="position-old mono">
-        Not <span class="strike">"we make websites and send emails"</span> — two separate deliverables handed off and forgotten.
+  <section class="pledge">
+    <div class="wrap pledge-grid">
+      <div class="pledge-old mono">
+        Not <span class="strike">"we make websites and send emails"</span> — two jobs handed off and forgotten.
       </div>
-      <div class="position-new">
-        One connected system: your <span class="accent">website</span> captures interest, your <span class="accent">emails</span> hold the conversation, and the <span class="accent">automation</span> between them runs on its own.
+      <div class="pledge-new">
+        One connected system: your <span class="accent">website</span> earns attention, your <span class="accent2">automation</span> keeps it — on its own, every time.
       </div>
     </div>
   </section>
@@ -266,46 +218,35 @@
   <section class="section" id="services">
     <div class="wrap">
       <div class="section-head">
-        <span class="section-eyebrow mono">What we do</span>
+        <span class="section-eyebrow">What we do</span>
         <h2 class="section-title">Four disciplines, one system</h2>
         <p class="section-desc">Each service works on its own — together, they cover the full path from first visit to repeat customer.</p>
       </div>
 
       <div class="service-grid">
         <div class="service-card">
-          <svg class="service-icon" viewBox="0 0 38 38" fill="none"><rect x="3" y="7" width="32" height="24" rx="3" stroke="#4ED9C5" stroke-width="1.6"/><path d="M3 13H35" stroke="#4ED9C5" stroke-width="1.6"/><circle cx="8" cy="10" r="1" fill="#4ED9C5"/><circle cx="12" cy="10" r="1" fill="#4ED9C5"/></svg>
+          <div class="dot dot-1"></div>
           <h3>Web Development</h3>
-          <p class="desc">Business sites, landing pages and online stores built responsive, fast, and ready to convert.</p>
-          <ul class="service-list">
-            <li>Business websites</li><li>Landing pages</li><li>E-commerce</li><li>Redesigns</li><li>Ongoing maintenance</li>
-          </ul>
+          <p>Business sites, landing pages and stores — responsive, fast, built to convert.</p>
+          <div class="service-tags"><span>Business sites</span><span>Landing pages</span><span>E-commerce</span></div>
         </div>
-
         <div class="service-card">
-          <svg class="service-icon" viewBox="0 0 38 38" fill="none"><rect x="3" y="8" width="32" height="22" rx="3" stroke="#E8A33D" stroke-width="1.6"/><path d="M3 11L19 22L35 11" stroke="#E8A33D" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <div class="dot dot-2"></div>
           <h3>Email Marketing</h3>
-          <p class="desc">Campaigns and newsletters — strategy, copy, design, and send — built to be opened and acted on.</p>
-          <ul class="service-list">
-            <li>Campaign management</li><li>Newsletters</li><li>Email design</li><li>Copywriting</li><li>Segmentation</li>
-          </ul>
+          <p>Campaigns and newsletters, from strategy to send, built to be opened.</p>
+          <div class="service-tags"><span>Campaigns</span><span>Newsletters</span><span>Copy + design</span></div>
         </div>
-
         <div class="service-card">
-          <svg class="service-icon" viewBox="0 0 38 38" fill="none"><circle cx="10" cy="10" r="4" stroke="#4ED9C5" stroke-width="1.6"/><circle cx="28" cy="28" r="4" stroke="#4ED9C5" stroke-width="1.6"/><path d="M13 12L25 26" stroke="#4ED9C5" stroke-width="1.6"/><circle cx="10" cy="10" r="1" fill="#4ED9C5"/></svg>
+          <div class="dot dot-3"></div>
           <h3>Automation</h3>
-          <p class="desc">Flows that run without you — triggered by what a customer does, not by a date on your calendar.</p>
-          <ul class="service-list">
-            <li>Welcome flows</li><li>Abandoned cart</li><li>Post-purchase</li><li>Win-back</li><li>Lead nurturing</li>
-          </ul>
+          <p>Flows triggered by what a customer does, not by a date on a calendar.</p>
+          <div class="service-tags"><span>Welcome</span><span>Abandoned cart</span><span>Win-back</span></div>
         </div>
-
         <div class="service-card">
-          <svg class="service-icon" viewBox="0 0 38 38" fill="none"><path d="M5 32V20M15 32V12M25 32V22M35 32V8" stroke="#E8A33D" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <div class="dot dot-4"></div>
           <h3>Analytics &amp; Growth</h3>
-          <p class="desc">Traffic, opens, clicks, and revenue — read together, so every change is backed by a number.</p>
-          <ul class="service-list">
-            <li>Google Analytics</li><li>Email analytics</li><li>Conversion tracking</li><li>Performance reports</li>
-          </ul>
+          <p>Traffic, opens, and revenue read together, so every change is backed by a number.</p>
+          <div class="service-tags"><span>GA4</span><span>Email analytics</span><span>Reports</span></div>
         </div>
       </div>
     </div>
@@ -314,12 +255,12 @@
   <section class="section" id="journey">
     <div class="wrap">
       <div class="section-head">
-        <span class="section-eyebrow mono">How it connects</span>
+        <span class="section-eyebrow">How it connects</span>
         <h2 class="section-title">A lead capture system, end to end</h2>
         <p class="section-desc">One example of the systems we build — a visitor arrives, and everything after that happens on its own.</p>
       </div>
 
-      <div class="journey-steps">
+      <div class="journey-rail">
         <div class="journey-step" data-n="1">
           <h4>Landing page</h4>
           <p>A visitor arrives from an ad, a search, or a share — and lands on a page built around one goal.</p>
@@ -358,9 +299,9 @@
 
   <section class="cta-section" id="contact">
     <div class="wrap">
-      <h2>Let's build the system your visitors move through</h2>
+      <h2>Let's build the <span class="hl">system</span> your visitors move through</h2>
       <p>Tell us about your business and where visitors are dropping off — we'll map out the website and email flow that fixes it.</p>
-      <a href="mailto:hello@nirmaviyo.com" class="btn-primary">hello@nirmaviyo.com</a>
+      <a href="mailto:nirmaviyo@gmail.com" class="btn-primary">nirmaviyo@gmail.com</a>
     </div>
   </section>
 </main>

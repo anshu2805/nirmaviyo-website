@@ -3,279 +3,261 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nirmaviyo — Your site, wired to sell</title>
+<title>Nirmaviyo — Websites that don't sit still</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy: #14224E;
-    --purple: #7B2FF7;
-    --cyan: #17D3E0;
-    --pink: #FF4FA6;
-    --bg: #FAF9F5;
-    --panel: #FFFFFF;
-    --ink: #2A2B2F;
-    --muted: #6A6C77;
-    --border: rgba(20,34,78,0.12);
+    --bg: #1B1140;
+    --bg-2: #251856;
+    --ink: #FFF9F0;
+    --muted: #C4B8EA;
+    --lime: #C6FF3D;
+    --coral: #FF5A3C;
+    --pink: #FF8AD8;
+    --border: rgba(255,249,240,0.14);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
     background:var(--bg); color:var(--ink);
-    font-family:'Work Sans', sans-serif;
-    -webkit-font-smoothing:antialiased;
+    font-family:'Manrope', sans-serif;
     overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
   }
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:0.01ms !important; animation-iteration-count:1 !important;}
   }
-  h1,h2,h3,.display{ font-family:'Plus Jakarta Sans', sans-serif; letter-spacing:-0.01em; }
-  .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:0.01em; }
+  h1,h2,h3,.display{ font-family:'Unbounded', sans-serif; }
+  .mono{ font-family:'Space Mono', monospace; }
   a{ color:inherit; text-decoration:none; }
-  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+  .wrap{ max-width:1200px; margin:0 auto; padding:0 32px; }
   @media (max-width:640px){ .wrap{ padding:0 20px; } }
 
-  .bg-orbit{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
-  .bg-orbit::before, .bg-orbit::after{
-    content:''; position:absolute; border-radius:50%; filter:blur(70px); opacity:0.28;
+  .bg-glow{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(700px 500px at 90% 0%, rgba(255,90,60,0.22), transparent 60%),
+      radial-gradient(600px 500px at 5% 30%, rgba(198,255,61,0.10), transparent 60%);
   }
-  .bg-orbit::before{ width:520px; height:520px; background:var(--purple); top:-160px; right:-120px; }
-  .bg-orbit::after{ width:420px; height:420px; background:var(--cyan); bottom:-140px; left:-100px; opacity:0.2; }
 
-  header{ position:sticky; top:0; z-index:50; background:rgba(250,249,245,0.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
-  nav{ display:flex; align-items:center; justify-content:space-between; padding:20px 0; }
-  .logo{ font-weight:800; font-size:1.2rem; color:var(--navy); display:flex; align-items:center; gap:8px; }
-  .logo-mark{ width:10px; height:10px; border-radius:3px; background:var(--pink); transform:rotate(45deg); }
-  .nav-links{ display:flex; gap:34px; font-size:0.9rem; color:var(--muted); }
-  .nav-links a:hover{ color:var(--navy); }
-  .nav-cta{ font-size:0.85rem; font-weight:700; padding:11px 22px; border-radius:100px; background:var(--navy); color:#fff; transition:transform .2s, background .2s; }
-  .nav-cta:hover{ transform:translateY(-1px); background:var(--purple); }
+  header{ position:sticky; top:0; z-index:50; background:rgba(27,17,64,0.85); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; }
+  .logo{ font-family:'Unbounded'; font-weight:700; font-size:1.15rem; }
+  .logo span{ color:var(--lime); }
+  .nav-links{ display:flex; gap:32px; font-size:0.88rem; color:var(--muted); }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-cta{ font-size:0.82rem; font-weight:700; padding:11px 22px; border-radius:8px; background:var(--lime); color:#141014; transform:rotate(-1.5deg); transition:transform .2s; display:inline-block; }
+  .nav-cta:hover{ transform:rotate(0deg) scale(1.04); }
   @media (max-width:780px){ .nav-links{ display:none; } }
 
+  /* MARQUEE */
+  .marquee{ background:var(--coral); color:#1B1140; overflow:hidden; white-space:nowrap; border-bottom:3px solid #1B1140; border-top:3px solid #1B1140; }
+  .marquee-track{ display:inline-flex; animation:scroll 26s linear infinite; }
+  .marquee-track span{ font-family:'Unbounded'; font-weight:700; font-size:0.95rem; padding:12px 28px; text-transform:uppercase; letter-spacing:0.02em; }
+  @keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
   /* HERO */
-  .hero{ position:relative; z-index:1; padding:100px 0 30px; }
-  .eyebrow{ display:inline-flex; align-items:center; gap:8px; font-size:0.78rem; font-weight:600; color:var(--purple); text-transform:uppercase; padding:6px 14px; border:1px solid rgba(123,47,247,0.28); border-radius:100px; margin-bottom:28px; background:rgba(123,47,247,0.06); }
-  h1.hero-title{ font-size:clamp(2.5rem,5.6vw,4.5rem); font-weight:800; line-height:1.06; color:var(--navy); max-width:15ch; margin-bottom:24px; }
-  h1.hero-title .hl{ color:var(--pink); }
-  .hero-sub{ font-size:1.15rem; color:var(--muted); max-width:46ch; line-height:1.6; margin-bottom:36px; }
-  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:70px; }
-  .btn-primary{ background:var(--navy); color:#fff; font-weight:700; padding:15px 28px; border-radius:100px; font-size:0.95rem; transition:transform .2s, background .2s; }
-  .btn-primary:hover{ background:var(--purple); transform:translateY(-2px); }
-  .btn-secondary{ border:1.5px solid var(--border); padding:14px 28px; border-radius:100px; font-size:0.95rem; font-weight:600; color:var(--navy); transition:border-color .2s, background .2s; }
-  .btn-secondary:hover{ border-color:var(--cyan); background:rgba(23,211,224,0.08); }
+  .hero{ position:relative; z-index:1; padding:90px 0 40px; }
+  .hero-grid{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center; }
+  @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
 
-  /* ORBIT DIAGRAM */
-  .orbit-wrap{ position:relative; width:100%; padding:10px 0 30px; }
-  .orbit-svg{ width:100%; height:auto; }
-  .orbit-ring{ fill:none; stroke:var(--border); stroke-width:1.4; }
-  .orbit-arc{ fill:none; stroke-width:2.4; stroke-linecap:round; }
-  .orbit-node-label{ font-family:'Plus Jakarta Sans'; font-weight:700; fill:var(--navy); }
-  .orbit-node-sub{ font-family:'JetBrains Mono'; fill:var(--muted); }
-  .spin-slow{ animation:spin 40s linear infinite; transform-origin:600px 170px; }
-  @keyframes spin{ to{ transform:rotate(360deg); } }
+  h1.hero-title{ font-size:clamp(2.6rem,6vw,4.6rem); font-weight:700; line-height:1.02; margin-bottom:26px; }
+  h1.hero-title .line2{ color:var(--lime); }
+  h1.hero-title .line3{
+    display:inline-block; background:var(--coral); color:var(--bg); padding:2px 14px; border-radius:6px; transform:rotate(-1deg);
+  }
+  .hero-sub{ font-size:1.1rem; color:var(--muted); max-width:44ch; line-height:1.6; margin-bottom:34px; }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn-lime{ background:var(--lime); color:#141014; font-weight:700; padding:15px 30px; border-radius:10px; font-size:0.95rem; transform:rotate(-1deg); transition:transform .2s; display:inline-block; }
+  .btn-lime:hover{ transform:rotate(0) translateY(-2px); }
+  .btn-ghost{ border:2px solid var(--ink); padding:13px 28px; border-radius:10px; font-size:0.95rem; font-weight:600; transition:background .2s, color .2s; }
+  .btn-ghost:hover{ background:var(--ink); color:var(--bg); }
 
-  /* PLEDGE */
-  .pledge{ border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:52px 0; position:relative; z-index:1; background:var(--panel); }
-  .pledge-grid{ display:grid; grid-template-columns:1fr 1.4fr; gap:48px; align-items:start; }
-  @media (max-width:780px){ .pledge-grid{ grid-template-columns:1fr; gap:18px; } }
-  .pledge-old{ color:var(--muted); font-size:1rem; }
-  .pledge-old .strike{ text-decoration:line-through; text-decoration-color:rgba(106,108,119,0.5); }
-  .pledge-new{ font-size:1.5rem; line-height:1.4; font-weight:700; color:var(--navy); }
-  .pledge-new .accent{ color:var(--pink); }
-  .pledge-new .accent2{ color:var(--cyan); }
+  /* sticker cluster */
+  .sticker-stage{ position:relative; height:340px; }
+  .sticker{
+    position:absolute; border-radius:16px; padding:18px 20px; font-family:'Unbounded'; font-weight:600;
+    box-shadow:0 12px 30px rgba(0,0,0,0.35); font-size:0.95rem;
+  }
+  .s1{ top:0; right:10%; background:var(--pink); color:#1B1140; transform:rotate(6deg); animation:float1 5s ease-in-out infinite; }
+  .s2{ top:38%; right:0; background:var(--lime); color:#141014; transform:rotate(-5deg); animation:float2 6s ease-in-out infinite; }
+  .s3{ bottom:0; right:22%; background:var(--coral); color:#1B1140; transform:rotate(3deg); animation:float3 5.5s ease-in-out infinite; }
+  .s4{ top:14%; left:0; background:var(--ink); color:#1B1140; transform:rotate(-8deg); font-size:0.8rem; animation:float1 6.5s ease-in-out infinite reverse; }
+  @keyframes float1{ 0%,100%{ transform:translateY(0) rotate(6deg); } 50%{ transform:translateY(-10px) rotate(4deg); } }
+  @keyframes float2{ 0%,100%{ transform:translateY(0) rotate(-5deg); } 50%{ transform:translateY(-12px) rotate(-7deg); } }
+  @keyframes float3{ 0%,100%{ transform:translateY(0) rotate(3deg); } 50%{ transform:translateY(-8px) rotate(1deg); } }
+  @media (max-width:900px){ .sticker-stage{ height:220px; } .sticker{ font-size:0.8rem; padding:12px 14px;} }
 
-  /* SECTIONS */
-  .section{ padding:110px 0; position:relative; z-index:1; }
-  .section-head{ margin-bottom:56px; max-width:60ch; }
-  .section-eyebrow{ color:var(--purple); font-size:0.8rem; font-weight:700; text-transform:uppercase; margin-bottom:14px; display:block; letter-spacing:0.03em; }
-  .section-title{ font-size:clamp(1.85rem,3.4vw,2.6rem); font-weight:800; color:var(--navy); margin-bottom:14px; }
+  /* PLEDGE STRIP */
+  .pledge{ border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:44px 0; position:relative; z-index:1; }
+  .pledge p{ font-family:'Unbounded'; font-size:clamp(1.2rem,2.6vw,1.7rem); font-weight:500; line-height:1.5; max-width:26ch; }
+  .pledge .accent{ color:var(--lime); }
+  .pledge .accent2{ color:var(--coral); }
+
+  /* SERVICES - color block cards */
+  .section{ padding:100px 0; position:relative; z-index:1; }
+  .section-head{ margin-bottom:52px; max-width:60ch; }
+  .section-eyebrow{ color:var(--coral); font-size:0.8rem; text-transform:uppercase; font-weight:700; margin-bottom:14px; display:block; letter-spacing:0.04em; }
+  .section-title{ font-size:clamp(1.9rem,3.6vw,2.7rem); font-weight:700; margin-bottom:14px; }
   .section-desc{ color:var(--muted); font-size:1.05rem; line-height:1.6; }
 
-  .service-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
-  @media (max-width:980px){ .service-grid{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:560px){ .service-grid{ grid-template-columns:1fr; } }
-  .service-card{ background:var(--panel); border:1px solid var(--border); border-radius:18px; padding:32px 26px; transition:transform .22s, box-shadow .22s, border-color .22s; }
-  .service-card:hover{ transform:translateY(-5px); box-shadow:0 16px 34px rgba(20,34,78,0.08); }
-  .service-card .dot{ width:34px; height:34px; border-radius:9px; margin-bottom:20px; }
-  .dot-1{ background:var(--navy); }
-  .dot-2{ background:var(--purple); }
-  .dot-3{ background:var(--cyan); }
-  .dot-4{ background:var(--pink); }
-  .service-card h3{ font-size:1.2rem; font-weight:700; color:var(--navy); margin-bottom:10px; }
-  .service-card p{ color:var(--muted); font-size:0.92rem; line-height:1.55; margin-bottom:18px; }
-  .service-tags{ display:flex; flex-wrap:wrap; gap:7px; }
-  .service-tags span{ font-size:0.74rem; background:var(--bg); border:1px solid var(--border); padding:5px 11px; border-radius:100px; color:var(--ink); }
+  .card-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  @media (max-width:980px){ .card-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .card-grid{ grid-template-columns:1fr; } }
+  .card{ border-radius:20px; padding:30px 26px; min-height:270px; display:flex; flex-direction:column; transition:transform .25s; }
+  .card:hover{ transform:translateY(-6px); }
+  .card1{ background:var(--lime); color:#141014; }
+  .card2{ background:var(--coral); color:#1B1140; }
+  .card3{ background:var(--pink); color:#1B1140; }
+  .card4{ background:var(--ink); color:#1B1140; }
+  .card .tag{ font-family:'Space Mono'; font-size:0.75rem; margin-bottom:auto; opacity:0.75; }
+  .card h3{ font-size:1.35rem; margin:18px 0 10px; font-weight:700; }
+  .card p{ font-size:0.9rem; line-height:1.5; opacity:0.88; }
 
-  /* JOURNEY */
-  .journey-rail{ display:flex; flex-direction:column; border-left:2px solid var(--border); margin-left:14px; }
-  .journey-step{ position:relative; padding:0 0 50px 40px; }
-  .journey-step:last-child{ padding-bottom:0; }
-  .journey-step::before{
-    content:attr(data-n); position:absolute; left:-17px; top:0; width:32px; height:32px; border-radius:50%;
-    background:var(--panel); border:2px solid var(--cyan); color:var(--navy); font-family:'JetBrains Mono'; font-weight:700;
-    font-size:0.78rem; display:flex; align-items:center; justify-content:center;
-  }
-  .journey-step h4{ font-size:1.15rem; font-weight:700; color:var(--navy); margin-bottom:8px; }
-  .journey-step p{ color:var(--muted); font-size:0.95rem; line-height:1.55; max-width:56ch; }
+  /* TICKER STEPS */
+  .steps-wrap{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; border:2px solid var(--ink); border-radius:20px; overflow:hidden; }
+  @media (max-width:900px){ .steps-wrap{ grid-template-columns:1fr; } }
+  .step{ padding:34px 28px; border-right:2px solid var(--ink); position:relative; }
+  .step:last-child{ border-right:none; }
+  @media (max-width:900px){ .step{ border-right:none; border-bottom:2px solid var(--ink); } .step:last-child{ border-bottom:none; } }
+  .step .step-num{ font-family:'Unbounded'; font-size:2.2rem; font-weight:700; color:var(--lime); margin-bottom:14px; display:block; }
+  .step h4{ font-size:1.05rem; font-weight:700; margin-bottom:8px; }
+  .step p{ color:var(--muted); font-size:0.88rem; line-height:1.5; }
 
   /* FOCUS */
-  .focus-panel{ background:linear-gradient(120deg, var(--navy), #241a5e); border-radius:22px; padding:52px; color:#fff; }
-  @media (max-width:640px){ .focus-panel{ padding:32px 24px; } }
-  .focus-title{ font-size:1.6rem; font-weight:800; margin-bottom:10px; }
-  .focus-sub{ color:rgba(255,255,255,0.72); margin-bottom:32px; max-width:56ch; }
+  .focus-panel{ background:var(--bg-2); border:2px solid var(--border); border-radius:24px; padding:52px; }
+  @media (max-width:640px){ .focus-panel{ padding:32px 22px; } }
+  .focus-title{ font-size:1.7rem; font-weight:700; margin-bottom:10px; }
+  .focus-sub{ color:var(--muted); margin-bottom:30px; max-width:56ch; }
   .focus-pills{ display:flex; flex-wrap:wrap; gap:12px; }
-  .focus-pill{ display:flex; align-items:center; gap:10px; font-size:0.92rem; font-weight:600; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.24); color:#fff; padding:10px 18px; border-radius:100px; }
-  .focus-pill .num{ color:var(--cyan); font-family:'JetBrains Mono'; font-size:0.78rem; }
+  .focus-pill{ display:flex; align-items:center; gap:10px; font-size:0.92rem; font-weight:600; background:rgba(198,255,61,0.1); border:1.5px solid var(--lime); color:var(--ink); padding:10px 18px; border-radius:100px; }
+  .focus-pill .num{ color:var(--lime); font-family:'Space Mono'; font-size:0.78rem; }
 
   /* CTA */
   .cta-section{ text-align:center; padding:120px 0 100px; position:relative; z-index:1; }
-  .cta-section h2{ font-size:clamp(2rem,4vw,3rem); font-weight:800; color:var(--navy); max-width:18ch; margin:0 auto 20px; }
-  .cta-section h2 .hl{ color:var(--pink); }
-  .cta-section p{ color:var(--muted); max-width:48ch; margin:0 auto 36px; font-size:1.05rem; }
+  .cta-section h2{ font-size:clamp(2.1rem,4.6vw,3.4rem); font-weight:700; max-width:16ch; margin:0 auto 22px; line-height:1.08; }
+  .cta-section h2 .hl{ color:var(--lime); }
+  .cta-section p{ color:var(--muted); max-width:46ch; margin:0 auto 36px; font-size:1.05rem; }
 
-  footer{ border-top:1px solid var(--border); padding:40px 0; position:relative; z-index:1; }
+  footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z-index:1; }
   .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
-  .footer-row .mono{ font-size:0.82rem; color:var(--muted); }
+  .footer-row .mono{ font-size:0.8rem; color:var(--muted); }
 </style>
 </head>
 <body>
 
-<div class="bg-orbit" aria-hidden="true"></div>
+<div class="bg-glow" aria-hidden="true"></div>
 
 <header>
   <div class="wrap">
     <nav>
-      <div class="logo"><span class="logo-mark" aria-hidden="true"></span>Nirmaviyo</div>
+      <div class="logo">nirma<span>viyo</span></div>
       <div class="nav-links">
         <a href="#services">Services</a>
-        <a href="#journey">Process</a>
-        <a href="#focus">Where we start</a>
+        <a href="#steps">How it works</a>
+        <a href="#focus">Start here</a>
       </div>
-      <a href="#contact" class="nav-cta">Start a project</a>
+      <a href="#contact" class="nav-cta">Let's talk →</a>
     </nav>
   </div>
 </header>
 
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>★ WEBSITES</span><span>★ EMAIL FLOWS</span><span>★ AUTOMATION</span><span>★ REPEAT CUSTOMERS</span>
+    <span>★ WEBSITES</span><span>★ EMAIL FLOWS</span><span>★ AUTOMATION</span><span>★ REPEAT CUSTOMERS</span>
+    <span>★ WEBSITES</span><span>★ EMAIL FLOWS</span><span>★ AUTOMATION</span><span>★ REPEAT CUSTOMERS</span>
+  </div>
+</div>
+
 <main>
   <section class="hero">
-    <div class="wrap">
-      <span class="eyebrow mono">Web development · Email marketing · Automation</span>
-      <h1 class="hero-title">Your website, wired to <span class="hl">keep selling</span> after the visit ends.</h1>
-      <p class="hero-sub">Nirmaviyo designs the site, writes the emails, and connects the two into one automated system — so every visitor is followed up with, without anyone lifting a finger.</p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Start a project</a>
-        <a href="#services" class="btn-secondary">See what we do</a>
+    <div class="wrap hero-grid">
+      <div>
+        <h1 class="hero-title">Your website<br><span class="line2">shouldn't</span> go quiet<br>after <span class="line3">"thanks!"</span></h1>
+        <p class="hero-sub">Nirmaviyo builds the site, writes the emails, and wires an automation between them — so every visitor keeps hearing from you, without you lifting a finger.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-lime">Start a project</a>
+          <a href="#services" class="btn-ghost">What we build</a>
+        </div>
       </div>
-
-      <div class="orbit-wrap" role="img" aria-label="Diagram showing website, email, and automation orbiting a customer at the center">
-        <svg class="orbit-svg" viewBox="0 0 1180 340" xmlns="http://www.w3.org/2000/svg">
-          <circle class="orbit-ring" cx="600" cy="170" r="110"/>
-          <circle class="orbit-ring" cx="600" cy="170" r="58"/>
-          <g class="spin-slow">
-            <path class="orbit-arc" d="M600,60 A110,110 0 0 1 698,121" stroke="#7B2FF7"/>
-            <path class="orbit-arc" d="M698,219 A110,110 0 0 1 600,280" stroke="#17D3E0"/>
-            <path class="orbit-arc" d="M502,219 A110,110 0 0 1 502,121" stroke="#FF4FA6"/>
-          </g>
-          <circle cx="600" cy="170" r="33" fill="#14224E"/>
-          <text x="600" y="166" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans" font-weight="700" font-size="12">Your</text>
-          <text x="600" y="181" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans" font-weight="700" font-size="12">customer</text>
-
-          <g>
-            <circle cx="600" cy="60" r="7" fill="#7B2FF7"/>
-            <text class="orbit-node-label" x="600" y="38" text-anchor="middle" font-size="13">Website</text>
-          </g>
-          <g>
-            <circle cx="910" cy="170" r="7" fill="#17D3E0"/>
-            <text class="orbit-node-label" x="955" y="166" text-anchor="middle" font-size="13">Email</text>
-            <text class="orbit-node-sub" x="955" y="184" text-anchor="middle" font-size="10">flows</text>
-          </g>
-          <g>
-            <circle cx="600" cy="280" r="7" fill="#17D3E0"/>
-            <text class="orbit-node-label" x="600" y="308" text-anchor="middle" font-size="13">Automation</text>
-          </g>
-          <g>
-            <circle cx="290" cy="170" r="7" fill="#FF4FA6"/>
-            <text class="orbit-node-label" x="225" y="166" text-anchor="middle" font-size="13">Growth</text>
-            <text class="orbit-node-sub" x="225" y="184" text-anchor="middle" font-size="10">tracked</text>
-          </g>
-        </svg>
+      <div class="sticker-stage" aria-hidden="true">
+        <div class="sticker s1">Welcome flow ✉️</div>
+        <div class="sticker s2">Live in 2 weeks</div>
+        <div class="sticker s3">Zero manual follow-up</div>
+        <div class="sticker s4">Website + Klaviyo</div>
       </div>
     </div>
   </section>
 
   <section class="pledge">
-    <div class="wrap pledge-grid">
-      <div class="pledge-old mono">
-        Not <span class="strike">"we make websites and send emails"</span> — two jobs handed off and forgotten.
-      </div>
-      <div class="pledge-new">
-        One connected system: your <span class="accent">website</span> earns attention, your <span class="accent2">automation</span> keeps it — on its own, every time.
-      </div>
+    <div class="wrap">
+      <p>Not a website guy and an email girl working separately. <span class="accent">One system</span>, <span class="accent2">one team</span>, built to run itself.</p>
     </div>
   </section>
 
   <section class="section" id="services">
     <div class="wrap">
       <div class="section-head">
-        <span class="section-eyebrow">What we do</span>
-        <h2 class="section-title">Four disciplines, one system</h2>
-        <p class="section-desc">Each service works on its own — together, they cover the full path from first visit to repeat customer.</p>
+        <span class="section-eyebrow">What we build</span>
+        <h2 class="section-title">Four things, all wired together</h2>
+        <p class="section-desc">Pick one to start, or let all four run as a single system.</p>
       </div>
 
-      <div class="service-grid">
-        <div class="service-card">
-          <div class="dot dot-1"></div>
+      <div class="card-grid">
+        <div class="card card1">
+          <span class="tag">01 / SITES</span>
           <h3>Web Development</h3>
-          <p>Business sites, landing pages and stores — responsive, fast, built to convert.</p>
-          <div class="service-tags"><span>Business sites</span><span>Landing pages</span><span>E-commerce</span></div>
+          <p>Business sites, landing pages, stores — fast, mobile-ready, built to convert on day one.</p>
         </div>
-        <div class="service-card">
-          <div class="dot dot-2"></div>
+        <div class="card card2">
+          <span class="tag">02 / INBOX</span>
           <h3>Email Marketing</h3>
-          <p>Campaigns and newsletters, from strategy to send, built to be opened.</p>
-          <div class="service-tags"><span>Campaigns</span><span>Newsletters</span><span>Copy + design</span></div>
+          <p>Campaigns and newsletters people actually open, from strategy to send.</p>
         </div>
-        <div class="service-card">
-          <div class="dot dot-3"></div>
+        <div class="card card3">
+          <span class="tag">03 / FLOWS</span>
           <h3>Automation</h3>
-          <p>Flows triggered by what a customer does, not by a date on a calendar.</p>
-          <div class="service-tags"><span>Welcome</span><span>Abandoned cart</span><span>Win-back</span></div>
+          <p>Welcome, cart, win-back — flows that trigger themselves and never sleep.</p>
         </div>
-        <div class="service-card">
-          <div class="dot dot-4"></div>
+        <div class="card card4">
+          <span class="tag">04 / PROOF</span>
           <h3>Analytics &amp; Growth</h3>
-          <p>Traffic, opens, and revenue read together, so every change is backed by a number.</p>
-          <div class="service-tags"><span>GA4</span><span>Email analytics</span><span>Reports</span></div>
+          <p>Opens, clicks, conversions — read together so every next move is backed by numbers.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="journey">
+  <section class="section" id="steps">
     <div class="wrap">
       <div class="section-head">
-        <span class="section-eyebrow">How it connects</span>
-        <h2 class="section-title">A lead capture system, end to end</h2>
-        <p class="section-desc">One example of the systems we build — a visitor arrives, and everything after that happens on its own.</p>
+        <span class="section-eyebrow">The system</span>
+        <h2 class="section-title">One visitor, four automatic moves</h2>
+        <p class="section-desc">A real flow we build — from first click to a sales rep who's already in the loop.</p>
       </div>
-
-      <div class="journey-rail">
-        <div class="journey-step" data-n="1">
+      <div class="steps-wrap">
+        <div class="step">
+          <span class="step-num">01</span>
           <h4>Landing page</h4>
-          <p>A visitor arrives from an ad, a search, or a share — and lands on a page built around one goal.</p>
+          <p>A visitor lands from an ad or a search, built around one clear goal.</p>
         </div>
-        <div class="journey-step" data-n="2">
+        <div class="step">
+          <span class="step-num">02</span>
           <h4>Contact form</h4>
-          <p>They leave their details, and that information flows straight into your CRM — no manual entry.</p>
+          <p>Details flow straight into your CRM — no copy-pasting, no delay.</p>
         </div>
-        <div class="journey-step" data-n="3">
-          <h4>Automated email</h4>
-          <p>A welcome or confirmation email goes out immediately, while interest is still warm.</p>
+        <div class="step">
+          <span class="step-num">03</span>
+          <h4>Instant email</h4>
+          <p>A welcome or confirmation goes out while interest is still warm.</p>
         </div>
-        <div class="journey-step" data-n="4">
+        <div class="step">
+          <span class="step-num">04</span>
           <h4>Sales follow-up</h4>
-          <p>Your team gets notified with everything they need, so the next conversation starts already informed.</p>
+          <p>Your team gets notified, fully briefed, ready to close.</p>
         </div>
       </div>
     </div>
@@ -285,7 +267,7 @@
     <div class="wrap">
       <div class="focus-panel">
         <div class="focus-title">Where we start</div>
-        <p class="focus-sub">Nirmaviyo covers all four disciplines, but every engagement begins with the five services that move the needle fastest.</p>
+        <p class="focus-sub">Five services, chosen because they move the needle fastest — everything else comes after.</p>
         <div class="focus-pills">
           <span class="focus-pill"><span class="num">01</span>Website development</span>
           <span class="focus-pill"><span class="num">02</span>Landing pages</span>
@@ -299,17 +281,17 @@
 
   <section class="cta-section" id="contact">
     <div class="wrap">
-      <h2>Let's build the <span class="hl">system</span> your visitors move through</h2>
-      <p>Tell us about your business and where visitors are dropping off — we'll map out the website and email flow that fixes it.</p>
-      <a href="mailto:nirmaviyo@gmail.com" class="btn-primary">nirmaviyo@gmail.com</a>
+      <h2>Got a business that deserves a system, not a website?</h2>
+      <p>Tell us where visitors are dropping off — we'll map the site and email flow that fixes it.</p>
+      <a href="mailto:nirmaviyo@gmail.com" class="btn-lime">nirmaviyo@gmail.com</a>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap footer-row">
-    <div class="logo" style="font-size:1rem;"><span class="logo-mark" aria-hidden="true"></span>Nirmaviyo</div>
-    <span class="mono">Website · Email · Automation</span>
+    <div class="logo" style="font-size:0.95rem;">nirma<span>viyo</span></div>
+    <span class="mono">Websites · Emails · Automation</span>
   </div>
 </footer>
 

@@ -217,8 +217,9 @@ h1.hero-title .line3{ display:inline-block; background:var(--coral); color:var(-
 
 /* ---------- START A PROJECT FORM ---------- */
 .form-layout{ display:grid; grid-template-columns:0.8fr 1.2fr; gap:56px; align-items:flex-start; }
-@media (max-width:900px){ .form-layout{ grid-template-columns:1fr; gap:40px; } }
+@media (max-width:900px){ .form-layout{ grid-template-columns:1fr; gap:32px; } }
 .form-side{ position:sticky; top:110px; }
+@media (max-width:900px){ .form-side{ position:static; top:auto; } }
 .form-side h3{ font-size:1.5rem; margin-bottom:14px; }
 .form-side p{ color:var(--muted); line-height:1.6; margin-bottom:28px; }
 .form-side .mini-steps{ display:flex; flex-direction:column; gap:16px; }
@@ -854,7 +855,11 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
         </div>
 
         <div class="form-card">
-          <form id="project-form">
+          <form id="project-form" action="https://formsubmit.co/ajax/nirmaviyo@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="New Project Enquiry — Nirmaviyo Website">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
             <div class="form-section">
               <span class="form-section-title">01 — Tell us about you</span>
@@ -1101,13 +1106,51 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
     if(form){
       form.addEventListener('submit', function(e){
         e.preventDefault();
+        var submitBtn = form.querySelector('button[type="submit"]');
         var nameVal = document.getElementById('full-name').value || 'there';
         var card = document.querySelector('.form-card');
-        card.innerHTML = '<div style="text-align:center; padding:40px 10px;">'
-          + '<h3 style="margin-bottom:14px;">Thanks, ' + nameVal.split(' ')[0] + ' — got it. \u2705</h3>'
-          + '<p style="color:var(--muted); line-height:1.6; max-width:44ch; margin:0 auto 24px;">Your project enquiry has been received. We review every submission personally and usually reply within 1\u20132 business days.</p>'
-          + '<a href="#home" onclick="showPage(\'home\');return false;" class="btn-ghost">Back to home →</a>'
-          + '</div>';
+
+        if(submitBtn){
+          submitBtn.textContent = 'Sending...';
+          submitBtn.disabled = true;
+          submitBtn.style.opacity = '0.7';
+        }
+
+        var formData = new FormData(form);
+
+        fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData
+        })
+        .then(function(response){
+          if(!response.ok){ throw new Error('Request failed'); }
+          return response.json();
+        })
+        .then(function(){
+          card.innerHTML = '<div style="text-align:center; padding:40px 10px;">'
+            + '<h3 style="margin-bottom:14px;">Thanks, ' + nameVal.split(' ')[0] + ' — got it. \u2705</h3>'
+            + '<p style="color:var(--muted); line-height:1.6; max-width:44ch; margin:0 auto 24px;">Your project enquiry has been sent to Nirmaviyo. We review every submission personally and usually reply within 1\u20132 business days.</p>'
+            + '<a href="#home" onclick="showPage(\'home\');return false;" class="btn-ghost">Back to home →</a>'
+            + '</div>';
+        })
+        .catch(function(){
+          if(submitBtn){
+            submitBtn.textContent = 'Start my project →';
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+          }
+          var errBox = form.querySelector('.form-error-msg');
+          if(!errBox){
+            errBox = document.createElement('p');
+            errBox.className = 'form-error-msg';
+            errBox.style.color = 'var(--coral)';
+            errBox.style.marginTop = '14px';
+            errBox.style.fontSize = '0.86rem';
+            form.querySelector('.form-submit-row').appendChild(errBox);
+          }
+          errBox.textContent = "Something went wrong sending this — please email us directly at nirmaviyo@gmail.com, or try again.";
+        });
       });
     }
   });

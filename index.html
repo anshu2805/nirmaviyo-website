@@ -9,22 +9,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   NIRMAVIYO — shared stylesheet (v2 tokens, multi-page build)
+   NIRMAVIYO — visual system v3
+   Minimal, dark, single-accent aesthetic (SingleStore-inspired)
    ============================================================ */
 :root{
-  --bg: #1B1140;
-  --bg-2: #251856;
-  --ink: #FFF9F0;
-  --muted: #C4B8EA;
-  --lime: #C6FF3D;
-  --coral: #FF5A3C;
-  --pink: #FF8AD8;
-  --border: rgba(255,249,240,0.14);
+  --bg: #0a0a0e;
+  --bg-2: #131318;
+  --bg-3: #1b1b22;
+  --ink: #f4f4f6;
+  --muted: #8f8f9c;
+  --lime: #b6ff3f;
+  --coral: #ff7a5c;
+  --pink: #c48bff;
+  --border: rgba(244,244,246,0.09);
+  --border-strong: rgba(244,244,246,0.18);
 }
 *{box-sizing:border-box; margin:0; padding:0;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth; background:#0a0a0e;}
 body{
-  background:var(--bg); color:var(--ink);
+  background:#0a0a0e;
+  background:var(--bg);
+  color:var(--ink);
   font-family:'Manrope', sans-serif;
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
@@ -32,173 +37,172 @@ body{
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:0.01ms !important; animation-iteration-count:1 !important;}
 }
-h1,h2,h3,.display{ font-family:'Unbounded', sans-serif; }
+h1,h2,h3,.display{ font-family:'Unbounded', sans-serif; font-weight:600; letter-spacing:-0.01em; }
 .mono{ font-family:'Space Mono', monospace; }
 a{ color:inherit; text-decoration:none; }
 ul{ list-style:none; }
-.wrap{ max-width:1200px; margin:0 auto; padding:0 32px; }
+.wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
 @media (max-width:640px){ .wrap{ padding:0 20px; } }
 
 .bg-glow{
   position:fixed; inset:0; z-index:0; pointer-events:none;
   background:
-    radial-gradient(700px 500px at 90% 0%, rgba(255,90,60,0.22), transparent 60%),
-    radial-gradient(600px 500px at 5% 30%, rgba(198,255,61,0.10), transparent 60%);
+    radial-gradient(900px 560px at 82% -6%, rgba(182,255,63,0.08), transparent 60%),
+    radial-gradient(700px 520px at 8% 20%, rgba(196,139,255,0.06), transparent 60%);
 }
 
 /* ---------- HEADER / NAV ---------- */
-header{ position:sticky; top:0; z-index:50; background:rgba(27,17,64,0.85); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
-nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; }
-.logo{ font-family:'Unbounded'; font-weight:700; font-size:1.15rem; }
+header{ position:sticky; top:0; z-index:50; background:rgba(10,10,14,0.82); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
+nav{ display:flex; align-items:center; justify-content:space-between; padding:20px 0; }
+.logo{ font-family:'Unbounded'; font-weight:600; font-size:1.05rem; letter-spacing:-0.01em; }
 .logo span{ color:var(--lime); }
-.nav-links{ display:flex; gap:32px; font-size:0.88rem; color:var(--muted); }
+.nav-links{ display:flex; align-items:center; gap:14px; font-size:0.86rem; color:var(--muted); }
 .nav-links a{ transition:color .2s; }
 .nav-links a:hover, .nav-links a.active{ color:var(--ink); }
-.nav-cta{ font-size:0.82rem; font-weight:700; padding:11px 22px; border-radius:8px; background:var(--lime); color:#141014; transform:rotate(-1.5deg); transition:transform .2s; display:inline-block; }
-.nav-cta:hover{ transform:rotate(0deg) scale(1.04); }
-.nav-toggle{ display:none; }
+.nav-divider{ color:var(--border-strong); font-size:0.8rem; }
+.nav-start-link{ color:var(--lime) !important; font-weight:600; }
+.nav-start-link:hover{ opacity:0.85; }
+.nav-cta{ font-size:0.82rem; font-weight:600; padding:11px 22px; border-radius:8px; background:var(--lime); color:#0a0a0e; transition:opacity .2s, transform .2s; display:inline-block; }
+.nav-cta:hover{ opacity:0.88; transform:translateY(-1px); }
+.nav-cta-mobile{ display:none; }
 @media (max-width:780px){
   .nav-links{ display:none; }
+  .nav-cta-mobile{ display:inline-block; }
 }
 
-/* ---------- MARQUEE ---------- */
-.marquee{ background:var(--coral); color:#1B1140; overflow:hidden; white-space:nowrap; border-bottom:3px solid #1B1140; border-top:3px solid #1B1140; }
-.marquee-track{ display:inline-flex; animation:scroll 26s linear infinite; }
-.marquee-track span{ font-family:'Unbounded'; font-weight:700; font-size:0.95rem; padding:12px 28px; text-transform:uppercase; letter-spacing:0.02em; }
-@keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
-
-/* ---------- HERO (generic, reused per page with modifiers) ---------- */
-.hero{ position:relative; z-index:1; padding:90px 0 40px; }
-.hero-grid{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center; }
+/* ---------- HERO ---------- */
+.hero{ position:relative; z-index:1; padding:110px 0 60px; }
+.hero-grid{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center; }
 @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
 
-h1.hero-title{ font-size:clamp(2.6rem,6vw,4.6rem); font-weight:700; line-height:1.02; margin-bottom:26px; }
+h1.hero-title{ font-size:clamp(2.4rem,5.4vw,4rem); font-weight:600; line-height:1.08; letter-spacing:-0.02em; margin-bottom:24px; color:var(--ink); }
 h1.hero-title .line2{ color:var(--lime); }
-h1.hero-title .line3{ display:inline-block; background:var(--coral); color:var(--bg); padding:2px 14px; border-radius:6px; transform:rotate(-1deg); }
-.hero-sub{ font-size:1.1rem; color:var(--muted); max-width:48ch; line-height:1.6; margin-bottom:34px; }
-.hero-actions{ display:flex; gap:14px; flex-wrap:wrap; }
-.btn-lime{ background:var(--lime); color:#141014; font-weight:700; padding:15px 30px; border-radius:10px; font-size:0.95rem; transform:rotate(-1deg); transition:transform .2s; display:inline-block; border:none; cursor:pointer; font-family:'Manrope',sans-serif; }
-.btn-lime:hover{ transform:rotate(0) translateY(-2px); }
-.btn-ghost{ border:2px solid var(--ink); padding:13px 28px; border-radius:10px; font-size:0.95rem; font-weight:600; transition:background .2s, color .2s; display:inline-block; }
-.btn-ghost:hover{ background:var(--ink); color:var(--bg); }
+h1.hero-title .line3{ color:var(--ink); border-bottom:2px solid var(--coral); padding-bottom:2px; }
+.hero-sub{ font-size:1.08rem; color:var(--muted); max-width:46ch; line-height:1.65; margin-bottom:36px; font-weight:400; }
+.hero-actions{ display:flex; gap:12px; flex-wrap:wrap; }
+.btn-lime{ background:var(--lime); color:#0a0a0e; font-weight:600; padding:14px 28px; border-radius:8px; font-size:0.92rem; transition:opacity .2s, transform .2s; display:inline-block; border:none; cursor:pointer; font-family:'Manrope',sans-serif; }
+.btn-lime:hover{ opacity:0.88; transform:translateY(-1px); }
+.btn-ghost{ border:1px solid var(--border-strong); padding:13px 27px; border-radius:8px; font-size:0.92rem; font-weight:600; transition:border-color .2s, background .2s; display:inline-block; }
+.btn-ghost:hover{ border-color:var(--lime); background:rgba(182,255,63,0.05); }
 
-/* small eyebrow line used on every interior hero */
-.page-eyebrow{ font-family:'Space Mono'; font-size:0.82rem; color:var(--coral); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:18px; display:block; }
+.page-eyebrow{ font-family:'Space Mono'; font-size:0.78rem; color:var(--lime); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:18px; display:block; }
 
-/* sticker cluster (home only) */
-.sticker-stage{ position:relative; height:340px; }
-.sticker{ position:absolute; border-radius:16px; padding:18px 20px; font-family:'Unbounded'; font-weight:600; box-shadow:0 12px 30px rgba(0,0,0,0.35); font-size:0.95rem; }
-.s1{ top:0; right:10%; background:var(--pink); color:#1B1140; transform:rotate(6deg); animation:float1 5s ease-in-out infinite; }
-.s2{ top:38%; right:0; background:var(--lime); color:#141014; transform:rotate(-5deg); animation:float2 6s ease-in-out infinite; }
-.s3{ bottom:0; right:22%; background:var(--coral); color:#1B1140; transform:rotate(3deg); animation:float3 5.5s ease-in-out infinite; }
-.s4{ top:14%; left:0; background:var(--ink); color:#1B1140; transform:rotate(-8deg); font-size:0.8rem; animation:float1 6.5s ease-in-out infinite reverse; }
-@keyframes float1{ 0%,100%{ transform:translateY(0) rotate(6deg); } 50%{ transform:translateY(-10px) rotate(4deg); } }
-@keyframes float2{ 0%,100%{ transform:translateY(0) rotate(-5deg); } 50%{ transform:translateY(-12px) rotate(-7deg); } }
-@keyframes float3{ 0%,100%{ transform:translateY(0) rotate(3deg); } 50%{ transform:translateY(-8px) rotate(1deg); } }
-@media (max-width:900px){ .sticker-stage{ height:220px; } .sticker{ font-size:0.8rem; padding:12px 14px;} }
+/* hero preview panel (replaces sticker cluster) */
+.preview-panel{ background:var(--bg-2); border:1px solid var(--border); border-radius:16px; padding:30px 28px; position:relative; }
+.preview-label{ font-size:0.72rem; color:var(--muted); letter-spacing:0.1em; display:block; margin-bottom:22px; }
+.preview-flow{ display:flex; flex-direction:column; }
+.preview-node{ display:flex; align-items:center; gap:12px; font-size:0.92rem; font-weight:600; padding:13px 0; color:var(--ink); }
+.preview-node.highlight{ color:var(--lime); }
+.preview-connector{ width:1px; height:16px; background:var(--border-strong); margin-left:5px; }
+.dot{ width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+.dot-lime{ background:var(--lime); }
+.dot-coral{ background:var(--coral); }
+.dot-pink{ background:var(--pink); }
+.preview-footnote{ display:block; margin-top:20px; font-size:0.74rem; color:var(--muted); border-top:1px solid var(--border); padding-top:16px; }
+@media (max-width:900px){ .preview-panel{ padding:26px 22px; } }
 
 /* ---------- PLEDGE STRIP ---------- */
-.pledge{ border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:44px 0; position:relative; z-index:1; }
-.pledge p{ font-family:'Unbounded'; font-size:clamp(1.2rem,2.6vw,1.7rem); font-weight:500; line-height:1.5; max-width:30ch; }
+.pledge{ border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:48px 0; position:relative; z-index:1; }
+.pledge p{ font-family:'Unbounded'; font-weight:500; font-size:clamp(1.15rem,2.4vw,1.55rem); line-height:1.5; max-width:32ch; color:var(--ink); }
 .pledge .accent{ color:var(--lime); }
-.pledge .accent2{ color:var(--coral); }
+.pledge .accent2{ color:var(--ink); }
 
 /* ---------- GENERIC SECTION ---------- */
-.section{ padding:100px 0; position:relative; z-index:1; }
-.section-tight{ padding:70px 0; }
-.section-head{ margin-bottom:52px; max-width:64ch; }
+.section{ padding:110px 0; position:relative; z-index:1; }
+.section-tight{ padding:76px 0; }
+.section-head{ margin-bottom:56px; max-width:64ch; }
 .section-head.center{ margin-left:auto; margin-right:auto; text-align:center; }
-.section-eyebrow{ color:var(--coral); font-size:0.8rem; text-transform:uppercase; font-weight:700; margin-bottom:14px; display:block; letter-spacing:0.04em; }
-.section-title{ font-size:clamp(1.9rem,3.6vw,2.7rem); font-weight:700; margin-bottom:14px; }
-.section-desc{ color:var(--muted); font-size:1.05rem; line-height:1.6; }
+.section-eyebrow{ color:var(--lime); font-size:0.76rem; text-transform:uppercase; font-weight:600; margin-bottom:16px; display:block; letter-spacing:0.08em; font-family:'Space Mono'; }
+.section-title{ font-size:clamp(1.7rem,3.2vw,2.4rem); font-weight:600; margin-bottom:14px; letter-spacing:-0.01em; color:var(--ink); }
+.section-desc{ color:var(--muted); font-size:1.02rem; line-height:1.65; }
 
-/* ---------- COLOR-BLOCK CARDS ---------- */
-.card-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+/* ---------- CARDS (flat, monochrome, accent-dot coded) ---------- */
+.card-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
 @media (max-width:980px){ .card-grid{ grid-template-columns:repeat(2,1fr); } }
 @media (max-width:560px){ .card-grid{ grid-template-columns:1fr; } }
-.card{ border-radius:20px; padding:30px 26px; min-height:270px; display:flex; flex-direction:column; transition:transform .25s; }
-.card:hover{ transform:translateY(-6px); }
-.card1{ background:var(--lime); color:#141014; }
-.card2{ background:var(--coral); color:#1B1140; }
-.card3{ background:var(--pink); color:#1B1140; }
-.card4{ background:var(--ink); color:#1B1140; }
-.card .tag{ font-family:'Space Mono'; font-size:0.75rem; margin-bottom:auto; opacity:0.75; }
-.card h3{ font-size:1.35rem; margin:18px 0 10px; font-weight:700; }
-.card p{ font-size:0.9rem; line-height:1.5; opacity:0.88; }
-.card a.card-link{ margin-top:16px; font-family:'Space Mono'; font-size:0.8rem; font-weight:700; text-decoration:underline; }
+.card{ background:var(--bg-2); padding:32px 26px; min-height:250px; display:flex; flex-direction:column; transition:background .25s; }
+.card:hover{ background:var(--bg-3); }
+.card1{ border-top:2px solid var(--lime); }
+.card2{ border-top:2px solid var(--coral); }
+.card3{ border-top:2px solid var(--pink); }
+.card4{ border-top:2px solid var(--ink); }
+.card .tag{ font-family:'Space Mono'; font-size:0.72rem; margin-bottom:auto; color:var(--muted); }
+.card h3{ font-size:1.22rem; margin:20px 0 10px; font-weight:600; color:var(--ink); }
+.card p{ font-size:0.9rem; line-height:1.55; color:var(--muted); }
+.card a.card-link{ margin-top:18px; font-family:'Space Mono'; font-size:0.78rem; font-weight:600; color:var(--lime); }
 
-/* small outline chip used for offering lists inside service blocks */
 .chip-grid{ display:flex; flex-wrap:wrap; gap:10px; margin:26px 0 30px; }
-.chip{ border:1.5px solid var(--border); padding:10px 18px; border-radius:100px; font-size:0.88rem; font-weight:600; }
+.chip{ border:1px solid var(--border-strong); padding:9px 17px; border-radius:100px; font-size:0.85rem; font-weight:500; color:var(--muted); }
 
 /* ---------- NUMBERED STEP STRIP ---------- */
-.steps-wrap{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; border:2px solid var(--ink); border-radius:20px; overflow:hidden; }
+.steps-wrap{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
 .steps-wrap.steps-5{ grid-template-columns:repeat(5,1fr); }
 @media (max-width:900px){ .steps-wrap{ grid-template-columns:1fr !important; } }
-.step{ padding:34px 28px; border-right:2px solid var(--ink); position:relative; }
-.step:last-child{ border-right:none; }
-@media (max-width:900px){ .step{ border-right:none; border-bottom:2px solid var(--ink); } .step:last-child{ border-bottom:none; } }
-.step .step-num{ font-family:'Unbounded'; font-size:2.2rem; font-weight:700; color:var(--lime); margin-bottom:14px; display:block; }
-.step h4{ font-size:1.05rem; font-weight:700; margin-bottom:8px; }
-.step p{ color:var(--muted); font-size:0.88rem; line-height:1.5; }
+.step{ padding:34px 28px; background:var(--bg-2); }
+.step .step-num{ font-family:'Space Mono'; font-size:1.5rem; font-weight:700; color:var(--lime); margin-bottom:16px; display:block; }
+.step h4{ font-size:1rem; font-weight:600; margin-bottom:8px; color:var(--ink); }
+.step p{ color:var(--muted); font-size:0.87rem; line-height:1.55; }
 
-/* ---------- FOCUS PANEL (tools / pills) ---------- */
-.focus-panel{ background:var(--bg-2); border:2px solid var(--border); border-radius:24px; padding:52px; }
+/* ---------- FOCUS PANEL (tools) ---------- */
+.focus-panel{ background:var(--bg-2); border:1px solid var(--border); border-radius:16px; padding:52px; }
 @media (max-width:640px){ .focus-panel{ padding:32px 22px; } }
-.focus-title{ font-size:1.7rem; font-weight:700; margin-bottom:10px; }
+.focus-title{ font-size:1.4rem; font-weight:600; margin-bottom:10px; color:var(--ink); }
 .focus-sub{ color:var(--muted); margin-bottom:30px; max-width:56ch; }
 .focus-pills{ display:flex; flex-wrap:wrap; gap:12px; }
-.focus-pill{ display:flex; align-items:center; gap:10px; font-size:0.92rem; font-weight:600; background:rgba(198,255,61,0.1); border:1.5px solid var(--lime); color:var(--ink); padding:10px 18px; border-radius:100px; }
-.focus-pill .num{ color:var(--lime); font-family:'Space Mono'; font-size:0.78rem; }
+.focus-pill{ display:flex; align-items:center; gap:10px; font-size:0.88rem; font-weight:500; background:var(--bg-3); border:1px solid var(--border); color:var(--ink); padding:10px 18px; border-radius:100px; }
+.focus-pill .num{ color:var(--lime); font-family:'Space Mono'; font-size:0.74rem; }
 
-/* ---------- SERVICE BLOCKS (services.html) ---------- */
+/* ---------- SERVICE BLOCKS ---------- */
 .service-block{ border-top:1px solid var(--border); padding:70px 0; position:relative; z-index:1; }
 .service-block:first-of-type{ border-top:none; }
 .service-head{ display:flex; align-items:baseline; gap:18px; margin-bottom:18px; flex-wrap:wrap; }
-.service-num{ font-family:'Space Mono'; font-size:0.85rem; padding:6px 14px; border-radius:100px; font-weight:700; }
-.num-lime{ background:var(--lime); color:#141014; }
-.num-coral{ background:var(--coral); color:#1B1140; }
-.num-pink{ background:var(--pink); color:#1B1140; }
-.num-ink{ background:var(--ink); color:#1B1140; }
-.service-block h2{ font-size:clamp(1.7rem,3.2vw,2.3rem); font-weight:700; }
-.service-block > .wrap > p.lead{ color:var(--muted); font-size:1.05rem; max-width:60ch; line-height:1.6; margin-bottom:8px; }
+.service-num{ font-family:'Space Mono'; font-size:0.8rem; padding:5px 13px; border-radius:100px; font-weight:600; border:1px solid var(--border-strong); }
+.num-lime{ color:var(--lime); border-color:var(--lime); }
+.num-coral{ color:var(--coral); border-color:var(--coral); }
+.num-pink{ color:var(--pink); border-color:var(--pink); }
+.num-ink{ color:var(--ink); }
+.service-block h2{ font-size:clamp(1.5rem,2.8vw,2.05rem); font-weight:600; color:var(--ink); }
+.service-block > .wrap > p.lead{ color:var(--muted); font-size:1.02rem; max-width:60ch; line-height:1.6; margin-bottom:8px; }
+.service-grid{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:44px; align-items:center; }
+@media (max-width:860px){ .service-grid{ grid-template-columns:1fr; gap:28px; } }
+.service-copy p.lead{ color:var(--muted); font-size:1.02rem; max-width:60ch; line-height:1.6; margin-bottom:8px; }
 
 /* connected system diagram */
-.flow-diagram{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; font-family:'Unbounded'; font-weight:600; font-size:1rem; }
-.flow-diagram .node{ padding:12px 20px; border-radius:100px; border:1.5px solid var(--border); }
-.flow-diagram .arrow{ color:var(--lime); font-size:1.1rem; }
+.flow-diagram{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-family:'Space Mono'; font-weight:600; font-size:0.92rem; }
+.flow-diagram .node{ padding:11px 18px; border-radius:8px; border:1px solid var(--border-strong); color:var(--ink); }
+.flow-diagram .arrow{ color:var(--lime); font-size:1rem; }
 @media (max-width:640px){ .flow-diagram{ flex-direction:column; align-items:flex-start; } .flow-diagram .arrow{ transform:rotate(90deg); } }
 
-.system-panel{ background:var(--bg-2); border:2px solid var(--lime); border-radius:28px; padding:56px; text-align:center; }
+.system-panel{ background:var(--bg-2); border:1px solid var(--border); border-radius:16px; padding:56px; text-align:center; }
 @media (max-width:640px){ .system-panel{ padding:34px 20px; } }
 .system-panel .flow-diagram{ justify-content:center; margin:28px 0; }
-.system-panel p.tagline{ font-family:'Unbounded'; font-size:1.2rem; margin-top:18px; color:var(--lime); }
+.system-panel p.tagline{ font-family:'Unbounded'; font-weight:500; font-size:1.1rem; margin-top:18px; color:var(--lime); }
 
-/* "what are you looking to build" option grid */
-.option-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+/* option grid */
+.option-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
 @media (max-width:900px){ .option-grid{ grid-template-columns:repeat(2,1fr); } }
 @media (max-width:560px){ .option-grid{ grid-template-columns:1fr; } }
-.option-card{ border:1.5px solid var(--border); border-radius:18px; padding:26px 22px; transition:border-color .2s, transform .2s; display:block; }
-.option-card:hover{ border-color:var(--lime); transform:translateY(-4px); }
-.option-card .emoji{ font-size:1.6rem; display:block; margin-bottom:14px; }
-.option-card h4{ font-size:1.05rem; margin-bottom:6px; font-weight:700; }
-.option-card p{ color:var(--muted); font-size:0.86rem; line-height:1.5; }
+.option-card{ background:var(--bg-2); padding:28px 22px; transition:background .2s; display:block; }
+.option-card:hover{ background:var(--bg-3); }
+.option-card .emoji{ font-size:1.4rem; display:block; margin-bottom:14px; opacity:0.9; }
+.option-card h4{ font-size:1rem; margin-bottom:6px; font-weight:600; color:var(--ink); }
+.option-card p{ color:var(--muted); font-size:0.85rem; line-height:1.5; }
 
 /* ---------- WORK / PORTFOLIO ---------- */
-.work-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+.work-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
 @media (max-width:780px){ .work-grid{ grid-template-columns:1fr; } }
-.work-card{ border-radius:22px; padding:36px 30px; min-height:260px; display:flex; flex-direction:column; justify-content:flex-end; position:relative; overflow:hidden; transition:transform .25s; }
-.work-card:hover{ transform:translateY(-6px); }
-.work-card .work-num{ font-family:'Space Mono'; font-size:0.8rem; opacity:0.7; margin-bottom:auto; }
-.work-card h3{ font-size:1.5rem; margin:16px 0 8px; }
-.work-card p{ font-size:0.92rem; line-height:1.5; opacity:0.88; max-width:42ch; }
+.work-card{ background:var(--bg-2); padding:36px 30px; min-height:230px; display:flex; flex-direction:column; justify-content:flex-end; position:relative; transition:background .25s; }
+.work-card:hover{ background:var(--bg-3); }
+.work-card .work-num{ font-family:'Space Mono'; font-size:0.76rem; color:var(--muted); margin-bottom:auto; }
+.work-card h3{ font-size:1.35rem; margin:16px 0 8px; color:var(--ink); font-weight:600; }
+.work-card p{ font-size:0.9rem; line-height:1.55; color:var(--muted); max-width:44ch; }
 .work-card .work-tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; }
-.work-card .work-tags span{ font-family:'Space Mono'; font-size:0.72rem; border:1px solid currentColor; padding:4px 10px; border-radius:100px; opacity:0.75; }
-.wc-lime{ background:var(--lime); color:#141014; }
-.wc-coral{ background:var(--coral); color:#1B1140; }
-.wc-pink{ background:var(--pink); color:#1B1140; }
-.wc-ink{ background:var(--ink); color:#1B1140; }
-.wc-bg2{ background:var(--bg-2); color:var(--ink); border:1.5px solid var(--border); }
+.work-card .work-tags span{ font-family:'Space Mono'; font-size:0.7rem; border:1px solid var(--border-strong); padding:4px 10px; border-radius:100px; color:var(--muted); }
+.wc-lime{ border-top:2px solid var(--lime); }
+.wc-coral{ border-top:2px solid var(--coral); }
+.wc-pink{ border-top:2px solid var(--pink); }
+.wc-ink{ border-top:2px solid var(--ink); }
+.wc-bg2{ border-top:1px solid var(--border); }
 
 /* ---------- ABOUT ---------- */
 .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
@@ -206,73 +210,453 @@ h1.hero-title .line3{ display:inline-block; background:var(--coral); color:var(-
 .belief-list{ display:flex; flex-direction:column; gap:0; }
 .belief-item{ padding:22px 0; border-top:1px solid var(--border); display:flex; gap:18px; align-items:baseline; }
 .belief-item:last-child{ border-bottom:1px solid var(--border); }
-.belief-item .b-num{ font-family:'Space Mono'; color:var(--lime); font-size:0.85rem; flex-shrink:0; }
-.belief-item p{ font-size:1.02rem; line-height:1.5; }
+.belief-item .b-num{ font-family:'Space Mono'; color:var(--lime); font-size:0.82rem; flex-shrink:0; }
+.belief-item p{ font-size:1rem; line-height:1.5; color:var(--ink); }
 
-.founder-card{ background:var(--bg-2); border:2px solid var(--border); border-radius:24px; padding:44px; }
-.founder-avatar{ width:64px; height:64px; border-radius:16px; background:var(--pink); color:#1B1140; display:flex; align-items:center; justify-content:center; font-family:'Unbounded'; font-weight:700; font-size:1.3rem; margin-bottom:22px; transform:rotate(-4deg); }
-.founder-card h3{ font-size:1.35rem; margin-bottom:4px; }
-.founder-card .role{ color:var(--coral); font-family:'Space Mono'; font-size:0.8rem; margin-bottom:20px; display:block; }
-.founder-card p{ color:var(--muted); font-size:0.96rem; line-height:1.65; margin-bottom:14px; }
+.founder-card{ background:var(--bg-2); border:1px solid var(--border); border-radius:16px; padding:44px; }
+.founder-avatar{ width:56px; height:56px; border-radius:10px; background:var(--bg-3); border:1px solid var(--border-strong); color:var(--lime); display:flex; align-items:center; justify-content:center; font-family:'Unbounded'; font-weight:600; font-size:1.15rem; margin-bottom:22px; }
+.founder-card h3{ font-size:1.25rem; margin-bottom:4px; color:var(--ink); }
+.founder-card .role{ color:var(--lime); font-family:'Space Mono'; font-size:0.78rem; margin-bottom:20px; display:block; }
+.founder-card p{ color:var(--muted); font-size:0.95rem; line-height:1.65; margin-bottom:14px; }
 
 /* ---------- START A PROJECT FORM ---------- */
 .form-layout{ display:grid; grid-template-columns:0.8fr 1.2fr; gap:56px; align-items:flex-start; }
 @media (max-width:900px){ .form-layout{ grid-template-columns:1fr; gap:32px; } }
 .form-side{ position:sticky; top:110px; }
 @media (max-width:900px){ .form-side{ position:static; top:auto; } }
-.form-side h3{ font-size:1.5rem; margin-bottom:14px; }
+.form-side h3{ font-size:1.4rem; margin-bottom:14px; color:var(--ink); font-weight:600; }
 .form-side p{ color:var(--muted); line-height:1.6; margin-bottom:28px; }
 .form-side .mini-steps{ display:flex; flex-direction:column; gap:16px; }
-.form-side .mini-steps li{ font-size:0.92rem; color:var(--ink); display:flex; gap:12px; }
+.form-side .mini-steps li{ font-size:0.9rem; color:var(--ink); display:flex; gap:12px; }
 .form-side .mini-steps li b{ color:var(--lime); font-family:'Space Mono'; }
 
-.form-card{ background:var(--bg-2); border:2px solid var(--border); border-radius:24px; padding:44px; }
+.form-card{ background:var(--bg-2); border:1px solid var(--border); border-radius:16px; padding:44px; }
 @media (max-width:640px){ .form-card{ padding:26px 20px; } }
 .form-section{ margin-bottom:36px; }
 .form-section:last-child{ margin-bottom:0; }
-.form-section-title{ font-family:'Space Mono'; font-size:0.8rem; color:var(--lime); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:20px; display:block; }
+.form-section-title{ font-family:'Space Mono'; font-size:0.78rem; color:var(--lime); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:20px; display:block; }
 .field{ margin-bottom:20px; }
 .field:last-child{ margin-bottom:0; }
-.field label{ display:block; font-size:0.9rem; font-weight:700; margin-bottom:8px; }
-.field .hint{ color:var(--muted); font-size:0.8rem; font-weight:400; margin-top:6px; }
+.field label{ display:block; font-size:0.88rem; font-weight:600; margin-bottom:8px; color:var(--ink); }
+.field .hint{ color:var(--muted); font-size:0.79rem; font-weight:400; margin-top:6px; }
 .field input[type="text"],
 .field input[type="email"],
 .field input[type="url"],
 .field textarea{
-  width:100%; background:var(--bg); border:1.5px solid var(--border); border-radius:10px;
-  padding:13px 16px; color:var(--ink); font-family:'Manrope'; font-size:0.95rem; outline:none;
+  width:100%; background:var(--bg); border:1px solid var(--border-strong); border-radius:8px;
+  padding:13px 16px; color:var(--ink); font-family:'Manrope'; font-size:0.94rem; outline:none;
   transition:border-color .2s;
 }
 .field input:focus, .field textarea:focus{ border-color:var(--lime); }
 .field textarea{ min-height:120px; resize:vertical; }
 .check-grid, .radio-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
 @media (max-width:520px){ .check-grid, .radio-grid{ grid-template-columns:1fr; } }
-.check-option, .radio-option{ display:flex; align-items:center; gap:10px; border:1.5px solid var(--border); border-radius:10px; padding:12px 14px; font-size:0.9rem; cursor:pointer; transition:border-color .2s, background .2s; }
-.check-option:has(input:checked), .radio-option:has(input:checked){ border-color:var(--lime); background:rgba(198,255,61,0.08); }
+.check-option, .radio-option{ display:flex; align-items:center; gap:10px; border:1px solid var(--border-strong); border-radius:8px; padding:12px 14px; font-size:0.89rem; cursor:pointer; transition:border-color .2s, background .2s; color:var(--ink); }
+.check-option:has(input:checked), .radio-option:has(input:checked){ border-color:var(--lime); background:rgba(182,255,63,0.06); }
 .check-option input, .radio-option input{ accent-color:var(--lime); width:16px; height:16px; flex-shrink:0; }
 .form-submit-row{ margin-top:8px; }
-.form-fine-print{ color:var(--muted); font-size:0.8rem; margin-top:14px; line-height:1.5; }
+.form-fine-print{ color:var(--muted); font-size:0.79rem; margin-top:14px; line-height:1.5; }
+
+/* form progress indicator */
+.form-progress-wrap{ display:flex; align-items:center; gap:14px; margin-bottom:32px; }
+.form-progress-rail{ flex:1; height:4px; background:var(--border); border-radius:4px; overflow:hidden; }
+.form-progress-fill{ height:100%; width:0%; background:linear-gradient(90deg, var(--lime), var(--pink)); transition:width .35s ease; }
+.form-progress-label{ font-size:0.74rem; color:var(--muted); white-space:nowrap; }
+
+/* field completion state */
+.field{ position:relative; transition:opacity .2s; }
+.field.field-complete input, .field.field-complete textarea{ border-color:var(--lime); }
+.field.field-complete label::after{
+  content:'✓'; color:var(--lime); font-weight:700; margin-left:8px; font-size:0.78rem;
+  display:inline-block; animation:checkPop .3s ease;
+}
+@keyframes checkPop{ from{ transform:scale(0.4); opacity:0; } to{ transform:scale(1); opacity:1; } }
+.form-section-title{ display:flex; align-items:center; gap:8px; }
+.form-section.section-answered .form-section-title::after{
+  content:'✓'; color:var(--lime); font-weight:700; font-size:0.78rem; animation:checkPop .3s ease;
+}
 
 /* ---------- CTA / FOOTER ---------- */
 .cta-section{ text-align:center; padding:120px 0 100px; position:relative; z-index:1; }
-.cta-section h2{ font-size:clamp(2.1rem,4.6vw,3.4rem); font-weight:700; max-width:18ch; margin:0 auto 22px; line-height:1.08; }
+.cta-section h2{ font-size:clamp(1.9rem,4vw,2.9rem); font-weight:600; max-width:18ch; margin:0 auto 22px; line-height:1.12; color:var(--ink); }
 .cta-section h2 .hl{ color:var(--lime); }
-.cta-section p{ color:var(--muted); max-width:46ch; margin:0 auto 36px; font-size:1.05rem; }
-.cta-actions{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+.cta-section p{ color:var(--muted); max-width:46ch; margin:0 auto 36px; font-size:1.02rem; }
+.cta-actions{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
 
-footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z-index:1; }
+footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z-index:1; overflow:hidden; }
+footer::before{
+  content:''; position:absolute; left:50%; top:-60px; width:600px; height:160px; transform:translateX(-50%);
+  background:radial-gradient(circle, rgba(182,255,63,0.07), transparent 70%); pointer-events:none;
+}
 .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
-.footer-row .mono{ font-size:0.8rem; color:var(--muted); }
+.footer-row .mono{ font-size:0.78rem; color:var(--muted); }
 .footer-links{ display:flex; gap:22px; font-size:0.82rem; color:var(--muted); }
+.footer-links a{ position:relative; padding-bottom:2px; transition:color .2s; }
+.footer-links a::after{ content:''; position:absolute; left:0; bottom:-3px; width:0; height:1px; background:var(--lime); transition:width .25s ease; }
 .footer-links a:hover{ color:var(--ink); }
+.footer-links a:hover::after{ width:100%; }
+.logo{ transition:opacity .2s; }
+.logo:hover{ opacity:0.75; }
+.logo span{ transition:letter-spacing .25s ease; display:inline-block; }
+.logo:hover span{ letter-spacing:0.02em; }
 
 .nav-links a.active, .nav-cta.active { color: var(--lime); }
 .page { animation: pagefade .25s ease; }
 @keyframes pagefade { from{opacity:0;} to{opacity:1;} }
+
+/* ============================================================
+   ENHANCEMENT LAYER — icons, motion, depth, texture
+   ============================================================ */
+
+/* subtle nav underline sweep */
+.nav-links a{ position:relative; padding-bottom:2px; }
+.nav-links a::after{ content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:var(--lime); transition:width .25s ease; }
+.nav-links a:hover::after, .nav-links a.active::after{ width:100%; }
+
+/* button arrow micro-interaction */
+.btn-lime, .btn-ghost, .card-link{ position:relative; }
+.hero-actions a, .cta-actions a{ overflow:hidden; }
+
+/* animated background blobs */
+.bg-glow{ background-size:200% 200%; animation:driftGlow 22s ease-in-out infinite; }
+@keyframes driftGlow{
+  0%,100%{ background-position:0% 0%, 100% 100%; }
+  50%{ background-position:15% 10%, 85% 90%; }
+}
+
+/* fine grid texture behind sections for depth */
+.section, .hero{ position:relative; }
+.section::before, .hero::before{
+  content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(244,244,246,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244,244,246,0.03) 1px, transparent 1px);
+  background-size:56px 56px;
+  opacity:0.5;
+}
+
+/* live status badge */
+.live-badge{ display:inline-flex; align-items:center; gap:8px; font-family:'Space Mono'; font-size:0.76rem; color:var(--muted); border:1px solid var(--border-strong); padding:7px 14px; border-radius:100px; margin-bottom:22px; }
+.live-badge .pulse-dot{ width:7px; height:7px; border-radius:50%; background:var(--lime); position:relative; }
+.live-badge .pulse-dot::after{ content:''; position:absolute; inset:-4px; border-radius:50%; border:1px solid var(--lime); animation:pulseRing 2s ease-out infinite; }
+@keyframes pulseRing{ 0%{ transform:scale(0.6); opacity:0.9; } 100%{ transform:scale(2.1); opacity:0; } }
+
+/* mini stat badges under hero copy */
+.hero-stats{ display:flex; gap:28px; flex-wrap:wrap; margin-top:38px; padding-top:28px; border-top:1px solid var(--border); }
+.hero-stat b{ display:block; font-family:'Unbounded'; font-size:1.5rem; color:var(--ink); font-weight:600; }
+.hero-stat span{ font-size:0.78rem; color:var(--muted); }
+
+/* icon badges (service/card icons) */
+.icon-badge{ width:38px; height:38px; border-radius:9px; display:flex; align-items:center; justify-content:center; margin-bottom:16px; border:1px solid var(--border-strong); background:var(--bg-3); }
+.icon-badge svg{ width:18px; height:18px; }
+.icon-lime{ color:var(--lime); }
+.icon-coral{ color:var(--coral); }
+.icon-pink{ color:var(--pink); }
+.icon-ink{ color:var(--ink); }
+
+/* card hover glow lift (overrides base .card:hover from earlier for a bit more presence) */
+.card{ transition:background .25s, transform .25s, box-shadow .25s; }
+.card:hover{ transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,0.35); }
+.work-card{ transition:background .25s, transform .25s, box-shadow .25s; }
+.work-card:hover{ transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,0.35); }
+.option-card{ transition:background .2s, transform .2s; }
+.option-card:hover{ transform:translateY(-3px); }
+
+/* browser-chrome frame for preview panel + work thumbnails */
+.chrome-bar{ display:flex; align-items:center; gap:6px; padding-bottom:16px; margin-bottom:16px; border-bottom:1px solid var(--border); }
+.chrome-dot{ width:8px; height:8px; border-radius:50%; background:var(--border-strong); }
+
+/* animated connector line growth in preview panel */
+.preview-connector{ position:relative; overflow:hidden; }
+.preview-connector::after{ content:''; position:absolute; top:0; left:0; width:100%; height:0%; background:var(--lime); opacity:0.5; animation:growLine 2.6s ease-in-out infinite; }
+.preview-node:nth-child(2) .preview-connector::after,
+div:nth-child(2).preview-connector::after{ animation-delay:0s; }
+.preview-flow > .preview-connector:nth-of-type(1)::after{ animation-delay:0.1s; }
+.preview-flow > .preview-connector:nth-of-type(2)::after{ animation-delay:0.6s; }
+.preview-flow > .preview-connector:nth-of-type(3)::after{ animation-delay:1.1s; }
+.preview-flow > .preview-connector:nth-of-type(4)::after{ animation-delay:1.6s; }
+@keyframes growLine{ 0%{ height:0%; } 40%{ height:100%; } 100%{ height:100%; } }
+.preview-node.highlight .dot-lime{ animation:dotGlow 1.6s ease-in-out infinite; }
+@keyframes dotGlow{ 0%,100%{ box-shadow:0 0 0 0 rgba(182,255,63,0.5); } 50%{ box-shadow:0 0 0 6px rgba(182,255,63,0); } }
+
+/* stats bar section */
+.stats-bar{ border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:0; }
+.stats-grid{ display:grid; grid-template-columns:repeat(3,1fr); }
+@media (max-width:700px){ .stats-grid{ grid-template-columns:1fr; } }
+.stat-block{ padding:44px 32px; border-right:1px solid var(--border); }
+.stat-block:last-child{ border-right:none; }
+@media (max-width:700px){ .stat-block{ border-right:none; border-bottom:1px solid var(--border); } .stat-block:last-child{ border-bottom:none; } }
+.stat-block .stat-num{ font-family:'Unbounded'; font-size:clamp(2rem,4vw,2.7rem); font-weight:600; color:var(--lime); display:block; margin-bottom:8px; }
+.stat-block .stat-label{ color:var(--muted); font-size:0.88rem; }
+
+/* work-card mock browser thumbnail */
+.work-thumb{ border:1px solid var(--border); border-radius:8px; padding:10px 12px; margin-bottom:20px; background:var(--bg); }
+.work-thumb .chrome-bar{ margin-bottom:8px; padding-bottom:8px; }
+.work-thumb-bars{ display:flex; flex-direction:column; gap:6px; }
+.work-thumb-bars span{ display:block; height:6px; border-radius:3px; background:var(--border-strong); }
+.work-thumb-bars span:nth-child(1){ width:70%; }
+.work-thumb-bars span:nth-child(2){ width:100%; }
+.work-thumb-bars span:nth-child(3){ width:45%; }
+
+/* icon badge sits centered inline with the service number/heading */
+.service-head{ align-items:center; }
+.service-head .icon-badge{ margin-bottom:0; }
+
+/* scroll reveal */
+.reveal{ opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease; }
+.reveal.visible{ opacity:1; transform:translateY(0); }
+
+/* ============================================================
+   MOTION + GLASS LOOK v4 — cursor spotlight, tilt, glass panels,
+   count-up stats, scroll progress, floating orbs
+   ============================================================ */
+
+/* scroll progress bar */
+#scroll-progress{ position:fixed; top:0; left:0; height:3px; width:0%; background:linear-gradient(90deg, var(--lime), var(--pink)); z-index:100; transition:width .1s linear; }
+
+/* header shrinks + gains depth once you scroll */
+header{ transition:padding .25s ease, box-shadow .25s ease, background .25s ease; }
+header.scrolled{ box-shadow:0 8px 30px rgba(0,0,0,0.35); }
+header.scrolled nav{ padding:13px 0; }
+
+/* floating gradient orbs behind everything */
+.orb{ position:fixed; border-radius:50%; filter:blur(90px); z-index:0; pointer-events:none; opacity:0.5; }
+.orb-1{ width:520px; height:520px; background:radial-gradient(circle, rgba(182,255,63,0.22), transparent 70%); top:-140px; right:-100px; animation:orbFloat1 26s ease-in-out infinite; }
+.orb-2{ width:460px; height:460px; background:radial-gradient(circle, rgba(196,139,255,0.18), transparent 70%); bottom:-120px; left:-120px; animation:orbFloat2 30s ease-in-out infinite; }
+.orb-3{ width:340px; height:340px; background:radial-gradient(circle, rgba(255,122,92,0.14), transparent 70%); top:40%; left:50%; animation:orbFloat3 34s ease-in-out infinite; }
+@keyframes orbFloat1{ 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(-60px,50px) scale(1.12); } }
+@keyframes orbFloat2{ 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(50px,-40px) scale(1.08); } }
+@keyframes orbFloat3{ 0%,100%{ transform:translate(-50%,0) scale(1); } 50%{ transform:translate(-50%,-60px) scale(1.15); } }
+@media (prefers-reduced-motion: reduce){ .orb{ animation:none; } }
+
+/* redesigned subtle marquee (thin, grayscale, motion without noise) */
+.strip{ border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:hidden; white-space:nowrap; position:relative; z-index:1; background:rgba(255,255,255,0.015); }
+.strip-track{ display:inline-flex; animation:stripScroll 32s linear infinite; }
+.strip-track span{ font-family:'Space Mono'; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); padding:16px 34px; transition:color .2s; }
+.strip-track span:hover{ color:var(--lime); }
+.strip-track span::after{ content:'—'; margin-left:34px; color:var(--border-strong); }
+@keyframes stripScroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+/* glassmorphic panels — translucent + blurred, orbs show through */
+.card, .work-card, .option-card, .step, .stat-block,
+.focus-panel, .system-panel, .preview-panel, .form-card, .founder-card{
+  background:rgba(255,255,255,0.035) !important;
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+}
+
+/* cursor spotlight inside hero */
+.hero{ position:relative; }
+.spotlight{ position:absolute; inset:0; pointer-events:none; z-index:0; opacity:0; transition:opacity .3s ease; background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%), rgba(182,255,63,0.09), transparent 65%); }
+.hero:hover .spotlight{ opacity:1; }
+.hero > *{ position:relative; z-index:1; }
+
+/* tilt-on-hover for cards (JS sets --rx/--ry) */
+.card, .work-card, .option-card{
+  transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(0);
+  transition:transform .15s ease-out, background .25s, box-shadow .25s;
+}
+.card:hover, .work-card:hover, .option-card:hover{ box-shadow:0 20px 50px rgba(0,0,0,0.4); }
+
+/* animated gradient accent word */
+.gradient-text{
+  background:linear-gradient(90deg, var(--lime), var(--pink), var(--coral), var(--lime));
+  background-size:300% auto;
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  animation:gradientShift 6s ease infinite;
+}
+@keyframes gradientShift{ 0%{ background-position:0% 50%; } 50%{ background-position:100% 50%; } 100%{ background-position:0% 50%; } }
+
+/* count-up number wrapper (JS toggles nothing extra, just styling continuity) */
+.hero-stat b{ font-variant-numeric:tabular-nums; }
+
+/* ============================================================
+   LIVE VISUALS — small animated mockups per discipline
+   ============================================================ */
+.live-visual{ background:rgba(255,255,255,0.035); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid var(--border); border-radius:14px; padding:22px 24px; position:relative; overflow:hidden; }
+
+/* Website widget */
+.live-web-content{ padding-top:6px; position:relative; }
+.live-web-line{ height:9px; border-radius:4px; background:var(--border-strong); margin-bottom:10px; }
+.live-web-line.w-70{ width:70%; }
+.live-web-line.w-40{ width:40%; margin-bottom:22px; }
+.live-web-btn{ font-family:'Manrope'; font-size:0.82rem; font-weight:700; background:var(--lime); color:#0a0a0e; border:none; padding:9px 20px; border-radius:7px; position:relative; }
+.live-web-btn::after{ content:''; position:absolute; inset:0; border-radius:7px; box-shadow:0 0 0 0 rgba(182,255,63,0.55); animation:webPulse 2.4s ease-out infinite; }
+@keyframes webPulse{ 0%{ box-shadow:0 0 0 0 rgba(182,255,63,0.45); } 70%{ box-shadow:0 0 0 14px rgba(182,255,63,0); } 100%{ box-shadow:0 0 0 0 rgba(182,255,63,0); } }
+.live-web-cursor{ position:absolute; width:12px; height:12px; border:1.5px solid var(--ink); border-radius:50% 50% 50% 0; transform:rotate(-45deg); left:8%; top:6px; animation:cursorMove 3.4s ease-in-out infinite; opacity:0.85; }
+@keyframes cursorMove{ 0%,10%{ left:8%; top:6px; } 55%,65%{ left:32%; top:64px; } 100%{ left:8%; top:6px; } }
+
+/* Email widget */
+.live-email-row{ display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid var(--border); }
+.live-email-row:last-child{ border-bottom:none; }
+.live-email-dot{ width:8px; height:8px; border-radius:50%; background:var(--lime); flex-shrink:0; box-shadow:0 0 0 0 rgba(182,255,63,0.5); animation:emailPulse 2.2s ease-out infinite; }
+.live-email-dot.read{ background:var(--border-strong); animation:none; }
+@keyframes emailPulse{ 0%{ box-shadow:0 0 0 0 rgba(182,255,63,0.5); } 70%{ box-shadow:0 0 0 8px rgba(182,255,63,0); } 100%{ box-shadow:0 0 0 0 rgba(182,255,63,0); } }
+.live-email-text{ display:flex; flex-direction:column; gap:3px; flex:1; min-width:0; }
+.live-email-text b{ font-size:0.85rem; color:var(--ink); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.live-email-text span{ font-size:0.76rem; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.live-email-badge{ font-family:'Space Mono'; font-size:0.64rem; color:#0a0a0e; background:var(--lime); padding:2px 8px; border-radius:100px; flex-shrink:0; animation:badgeFade 2.2s ease-in-out infinite; }
+@keyframes badgeFade{ 0%,100%{ opacity:1; } 50%{ opacity:0.55; } }
+
+/* Automation widget */
+.live-flow-track{ display:flex; align-items:center; gap:8px; position:relative; flex-wrap:wrap; }
+.live-flow-node{ font-family:'Space Mono'; font-size:0.74rem; padding:9px 14px; border-radius:100px; border:1px solid var(--border-strong); color:var(--muted); background:var(--bg); }
+.live-flow-node.highlight{ color:var(--lime); border-color:var(--lime); }
+.live-flow-rail{ position:relative; height:2px; background:var(--border); border-radius:2px; margin:20px 0 4px; overflow:hidden; }
+.live-flow-pulse{ position:absolute; top:-3px; left:0; width:8px; height:8px; border-radius:50%; background:var(--lime); box-shadow:0 0 10px 2px rgba(182,255,63,0.6); animation:flowTravel 3s linear infinite; }
+@keyframes flowTravel{ 0%{ left:0%; } 100%{ left:calc(100% - 8px); } }
+
+/* Analytics widget */
+.live-bars{ display:flex; align-items:flex-end; gap:10px; height:90px; }
+.live-bars span{ flex:1; border-radius:4px 4px 0 0; background:linear-gradient(180deg, var(--lime), rgba(182,255,63,0.25)); height:var(--h); transform-origin:bottom; animation:barGrow 1.4s ease-out both; }
+.live-bars span:nth-child(1){ animation-delay:0s; }
+.live-bars span:nth-child(2){ animation-delay:0.1s; }
+.live-bars span:nth-child(3){ animation-delay:0.2s; }
+.live-bars span:nth-child(4){ animation-delay:0.3s; }
+.live-bars span:nth-child(5){ animation-delay:0.4s; }
+@keyframes barGrow{ from{ transform:scaleY(0); } to{ transform:scaleY(1); } }
+.live-badge-up{ display:inline-block; margin-top:16px; font-size:0.76rem; color:var(--lime); border:1px solid var(--lime); padding:5px 12px; border-radius:100px; }
+
+/* Individually-excellent feature rows (home page) */
+.feature-rows{ display:flex; flex-direction:column; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+.feature-row{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:44px; align-items:center; background:var(--bg-2); padding:48px; }
+.feature-row:nth-child(even){ direction:rtl; }
+.feature-row:nth-child(even) > *{ direction:ltr; }
+@media (max-width:860px){
+  .feature-row{ grid-template-columns:1fr; padding:32px 24px; }
+  .feature-row:nth-child(even){ direction:ltr; }
+}
+.feature-copy .feature-kicker{ font-family:'Space Mono'; font-size:0.74rem; color:var(--lime); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px; display:block; }
+.feature-copy h3{ font-size:clamp(1.25rem,2.4vw,1.6rem); font-weight:600; color:var(--ink); margin-bottom:12px; }
+.feature-copy p{ color:var(--muted); font-size:0.96rem; line-height:1.6; margin-bottom:18px; }
+.feature-highlights{ display:flex; flex-direction:column; gap:9px; margin-bottom:20px; }
+.feature-highlights li{ display:flex; align-items:center; gap:10px; font-size:0.88rem; color:var(--ink); }
+.feature-highlights li::before{ content:'✓'; color:var(--lime); font-weight:700; font-size:0.8rem; }
+.feature-link{ font-family:'Space Mono'; font-size:0.82rem; font-weight:600; color:var(--lime); }
+.feature-link:hover{ opacity:0.8; }
+/* ============================================================
+   PREMIUM UPGRADE PASS — hero entrance, scroll indicator, cursor,
+   system-diagram sequencing, process rail, richer hover states
+   ============================================================ */
+
+/* hero entrance reveal (runs on load / on returning to Home) */
+.hero-enter{ opacity:0; transform:translateY(18px); animation:heroEnter .8s cubic-bezier(.16,1,.3,1) forwards; }
+@keyframes heroEnter{ to{ opacity:1; transform:translateY(0); } }
+
+/* scroll indicator */
+.scroll-indicator{ position:absolute; left:50%; bottom:18px; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:6px; color:var(--muted); font-family:'Space Mono'; font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; opacity:0; animation:heroEnter .8s cubic-bezier(.16,1,.3,1) forwards; animation-delay:.9s; z-index:2; }
+.scroll-indicator svg{ width:16px; height:16px; animation:scrollBob 2s ease-in-out infinite; }
+@keyframes scrollBob{ 0%,100%{ transform:translateY(0); opacity:0.6; } 50%{ transform:translateY(6px); opacity:1; } }
+@media (max-width:900px){ .scroll-indicator{ display:none; } }
+
+/* subtle mouse-parallax on hero visual panel (JS sets --px/--py) */
+#hero-parallax-panel{ transform:translate(var(--px,0px), var(--py,0px)); transition:transform .3s ease-out; }
+
+/* custom cursor (desktop, fine pointer only — JS also gates this) */
+.cursor-dot, .cursor-ring{ position:fixed; top:0; left:0; pointer-events:none; z-index:9999; border-radius:50%; transform:translate(-50%,-50%); }
+.cursor-dot{ width:6px; height:6px; background:var(--lime); transition:opacity .2s ease, transform .15s ease; }
+.cursor-ring{ width:30px; height:30px; border:1px solid var(--border-strong); transition:transform .2s ease, opacity .2s ease, width .2s ease, height .2s ease, border-color .2s ease; }
+.cursor-ring.cursor-active{ width:44px; height:44px; border-color:var(--lime); background:rgba(182,255,63,0.06); }
+body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button{ cursor:none; }
+
+/* system-diagram sequential draw-in */
+.flow-diagram .node{ opacity:0; transform:translateY(10px) scale(0.96); transition:opacity .5s ease, transform .5s ease; }
+.flow-diagram .node.visible{ opacity:1; transform:translateY(0) scale(1); }
+.flow-diagram .arrow{ opacity:0; transition:opacity .4s ease .15s; }
+.flow-diagram .arrow.visible{ opacity:1; }
+
+/* how-it-works progress rail */
+.process-rail{ position:relative; height:3px; background:var(--border); border-radius:3px; margin:0 0 40px; overflow:hidden; }
+.process-rail-fill{ position:absolute; top:0; left:0; height:100%; width:0%; background:linear-gradient(90deg, var(--lime), var(--pink)); transition:width .15s linear; }
+.step{ transition:background .25s, border-color .25s, transform .3s; }
+.step.step-active{ background:var(--bg-3) !important; }
+.step.step-active .step-num{ transform:scale(1.12); }
+
+/* richer service/work card hover: gradient shift + glow border */
+.card, .work-card{ position:relative; }
+.card::before, .work-card::before{
+  content:''; position:absolute; inset:0; border-radius:inherit; padding:1px; opacity:0; transition:opacity .3s ease; pointer-events:none;
+  background:linear-gradient(135deg, var(--lime), transparent 40%, transparent 60%, var(--pink));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+}
+.card:hover::before, .work-card:hover::before{ opacity:0.5; }
+.icon-badge{ transition:transform .25s ease; }
+.card:hover .icon-badge{ transform:translateY(-3px) scale(1.05); }
+
+/* work-card thumbnail zoom + arrow reveal on hover */
+.work-thumb{ overflow:hidden; transition:transform .4s ease; }
+.work-card:hover .work-thumb{ transform:scale(1.015); }
+.work-card{ position:relative; }
+.work-card .work-arrow{ position:absolute; top:28px; right:28px; width:32px; height:32px; border-radius:50%; border:1px solid var(--border-strong); display:flex; align-items:center; justify-content:center; opacity:0; transform:translate(-6px,6px); transition:opacity .3s ease, transform .3s ease, border-color .3s ease; }
+.work-card:hover .work-arrow{ opacity:1; transform:translate(0,0); border-color:var(--lime); color:var(--lime); }
+.work-card .work-arrow svg{ width:14px; height:14px; }
+
+/* final CTA glow */
+.cta-section{ position:relative; overflow:hidden; }
+.cta-section::before{
+  content:''; position:absolute; left:50%; top:0; width:900px; height:500px; transform:translateX(-50%);
+  background:radial-gradient(circle, rgba(182,255,63,0.10), transparent 65%); pointer-events:none; z-index:-1;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-enter{ animation:none; opacity:1; transform:none; }
+  .scroll-indicator{ animation:none; opacity:1; }
+  .scroll-indicator svg{ animation:none; }
+  #hero-parallax-panel{ transform:none !important; }
+  .cursor-dot, .cursor-ring{ display:none; }
+}
+
+/* ============================================================
+   REVIEW PASS — tools marquee, pledge mask-reveal, founder card,
+   flagship case-study preview, belief alternating reveal
+   ============================================================ */
+
+/* Tools marquee (auto-scrolling, matches nav strip pattern) */
+.tools-strip{ border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:hidden; white-space:nowrap; position:relative; padding:6px 0; background:rgba(255,255,255,0.015); }
+.tools-strip-track{ display:inline-flex; gap:12px; animation:toolsScroll 28s linear infinite; padding:0 6px; }
+.tool-pill{ font-family:'Space Mono'; font-size:0.82rem; color:var(--muted); border:1px solid var(--border-strong); padding:9px 18px; border-radius:100px; transition:color .25s, border-color .25s; flex-shrink:0; }
+.tool-pill:hover{ color:var(--lime); border-color:var(--lime); }
+@keyframes toolsScroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+/* Pledge — word-by-word mask reveal on scroll */
+.pledge p{ overflow:visible; }
+.pledge .word{ display:inline-block; opacity:0.15; filter:blur(2px); transition:opacity .5s ease, filter .5s ease; }
+.pledge .word.visible{ opacity:1; filter:blur(0); }
+
+/* Founder card — considered entrance + tilt (added to tilt-eligible set via JS) */
+.founder-card{ transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)); transition:transform .2s ease-out, box-shadow .25s; }
+.founder-card:hover{ box-shadow:0 20px 50px rgba(0,0,0,0.35); }
+.founder-avatar{ position:relative; }
+.founder-avatar::after{ content:''; position:absolute; inset:-4px; border-radius:14px; border:1px solid var(--lime); opacity:0; transition:opacity .3s ease, transform .3s ease; transform:scale(0.9); }
+.founder-card:hover .founder-avatar::after{ opacity:0.6; transform:scale(1); }
+
+/* Flagship case-study — live mini iframe preview */
+.case-preview-frame-wrap{ position:relative; width:100%; aspect-ratio:16/9; border-radius:10px; overflow:hidden; border:1px solid var(--border); margin-bottom:20px; background:var(--bg); }
+.case-preview-frame-wrap iframe{ position:absolute; top:0; left:0; width:400%; height:400%; border:none; transform:scale(0.25); transform-origin:top left; pointer-events:none; }
+.case-preview-frame-wrap .case-preview-overlay{ position:absolute; inset:0; background:linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.35)); display:flex; align-items:flex-end; padding:14px; opacity:0; transition:opacity .3s ease; }
+.work-card:hover .case-preview-overlay{ opacity:1; }
+.case-preview-overlay span{ font-family:'Space Mono'; font-size:0.74rem; color:#fff; background:rgba(0,0,0,0.5); padding:6px 12px; border-radius:100px; }
+
+/* Belief list — alternating slide-in with a growing connector line */
+.belief-list{ position:relative; padding-left:22px; }
+.belief-list::before{ content:''; position:absolute; left:0; top:0; width:1px; height:0%; background:linear-gradient(180deg, var(--lime), var(--pink)); transition:height 1.1s ease; }
+.belief-list.visible::before{ height:100%; }
+.belief-item{ opacity:0; transition:opacity .55s ease, transform .55s ease; }
+.belief-item.belief-in{ opacity:1; transform:translateX(0) !important; }
+.belief-item:nth-child(odd){ transform:translateX(-16px); }
+.belief-item:nth-child(even){ transform:translateX(16px); }
 </style>
 </head>
 <body>
 
+<div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+<div id="scroll-progress"></div>
+<div class="orb orb-1" aria-hidden="true"></div>
+<div class="orb orb-2" aria-hidden="true"></div>
+<div class="orb orb-3" aria-hidden="true"></div>
 <div class="bg-glow" aria-hidden="true"></div>
 
 <header>
@@ -281,20 +665,25 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
       <a href="#home" data-nav="home" onclick="showPage('home');return false;" class="logo">nirma<span>viyo</span></a>
       <div class="nav-links">
         <a href="#home" data-nav="home" onclick="showPage('home');return false;">Home</a>
+        <span class="nav-divider">|</span>
         <a href="#services" data-nav="services" onclick="showPage('services');return false;">Services</a>
+        <span class="nav-divider">|</span>
         <a href="#work" data-nav="work" onclick="showPage('work');return false;">Work</a>
+        <span class="nav-divider">|</span>
         <a href="#about" data-nav="about" onclick="showPage('about');return false;">About</a>
+        <span class="nav-divider">|</span>
+        <a href="#start" data-nav="start" onclick="showPage('start');return false;" class="nav-start-link">Start a Project</a>
       </div>
-      <a href="#start" data-nav="start" onclick="showPage('start');return false;" class="nav-cta">Start a project →</a>
+      <a href="#start" data-nav="start" onclick="showPage('start');return false;" class="nav-cta nav-cta-mobile">Start a project →</a>
     </nav>
   </div>
 </header>
 
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>★ WEBSITES</span><span>★ EMAIL FLOWS</span><span>★ AUTOMATION</span><span>★ REPEAT CUSTOMERS</span>
-    <span>★ WEBSITES</span><span>★ EMAIL FLOWS</span><span>★ AUTOMATION</span><span>★ REPEAT CUSTOMERS</span>
-    <span>★ WEBSITES</span><span>★ EMAIL FLOWS</span><span>★ AUTOMATION</span><span>★ REPEAT CUSTOMERS</span>
+<div class="strip" aria-hidden="true">
+  <div class="strip-track">
+    <span>Websites</span><span>Email Marketing</span><span>Automation</span><span>Analytics</span>
+    <span>Websites</span><span>Email Marketing</span><span>Automation</span><span>Analytics</span>
+    <span>Websites</span><span>Email Marketing</span><span>Automation</span><span>Analytics</span>
   </div>
 </div>
 
@@ -302,28 +691,68 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
 <div class="page" id="page-home">
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="home-hero-spotlight">
+    <div class="spotlight" aria-hidden="true"></div>
     <div class="wrap hero-grid">
       <div>
-        <h1 class="hero-title">Your website<br><span class="line2">shouldn't</span> go quiet<br>after <span class="line3">"thanks!"</span></h1>
-        <p class="hero-sub">Nirmaviyo builds the site, writes the emails, and wires an automation between them — so every visitor keeps hearing from you, without you lifting a finger.</p>
-        <div class="hero-actions">
+        <span class="live-badge hero-enter" style="animation-delay:.05s;"><span class="pulse-dot"></span>Building live systems for real businesses</span>
+        <h1 class="hero-title hero-enter" style="animation-delay:.15s;">Your website<br><span class="line2 gradient-text">shouldn't</span> go quiet<br>after <span class="line3">"thanks!"</span></h1>
+        <p class="hero-sub hero-enter" style="animation-delay:.3s;">Nirmaviyo builds the site, writes the emails, and wires an automation between them — so every visitor keeps hearing from you, without you lifting a finger.</p>
+        <div class="hero-actions hero-enter" style="animation-delay:.42s;">
           <a href="#" data-nav="start" onclick="showPage('start');return false;" class="btn-lime">Start a project</a>
           <a href="#" data-nav="services" onclick="showPage('services');return false;" class="btn-ghost">What we build</a>
         </div>
+        <div class="hero-stats hero-enter" style="animation-delay:.54s;">
+          <div class="hero-stat"><b>4</b><span>Connected disciplines</span></div>
+          <div class="hero-stat"><b>1</b><span>Team, one system</span></div>
+          <div class="hero-stat"><b>0</b><span>Manual follow-up</span></div>
+        </div>
       </div>
-      <div class="sticker-stage" aria-hidden="true">
-        <div class="sticker s1">Welcome flow ✉️</div>
-        <div class="sticker s2">Live in 2 weeks</div>
-        <div class="sticker s3">Zero manual follow-up</div>
-        <div class="sticker s4">Website + Klaviyo</div>
+      <div class="preview-panel hero-enter" id="hero-parallax-panel" style="animation-delay:.3s;" aria-hidden="true">
+        <div class="chrome-bar"><span class="chrome-dot"></span><span class="chrome-dot"></span><span class="chrome-dot"></span></div>
+        <span class="preview-label mono">LIVE SYSTEM</span>
+        <div class="preview-flow">
+          <div class="preview-node"><span class="dot dot-lime"></span>Website visit</div>
+          <div class="preview-connector"></div>
+          <div class="preview-node"><span class="dot dot-coral"></span>Lead captured</div>
+          <div class="preview-connector"></div>
+          <div class="preview-node"><span class="dot dot-pink"></span>Automation triggered</div>
+          <div class="preview-connector"></div>
+          <div class="preview-node"><span class="dot dot-lime"></span>Email sent</div>
+          <div class="preview-connector"></div>
+          <div class="preview-node highlight"><span class="dot dot-lime"></span>Customer converted</div>
+        </div>
+        <span class="preview-footnote mono">No manual follow-up required</span>
+      </div>
+    </div>
+    <a href="#" class="scroll-indicator" aria-hidden="true" onclick="return false;">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14M6 13l6 6 6-6"/></svg>
+    </a>
+  </section>
+
+  <section class="stats-bar">
+    <div class="wrap">
+      <div class="stats-grid">
+        <div class="stat-block">
+          <span class="stat-num mono" data-countup="2" data-suffix="wk">0wk</span>
+          <span class="stat-label">Typical time to launch a connected build</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-num mono" data-countup="4" data-prefix="" data-suffix="-in-1">0-in-1</span>
+          <span class="stat-label">Website, email, automation &amp; analytics — one team</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-num mono" data-countup="100" data-suffix="%">0%</span>
+          <span class="stat-label">Of leads routed automatically, zero copy-paste</span>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="pledge">
     <div class="wrap">
-      <p>Not a website guy and an email girl working separately. <span class="accent">One system</span>, <span class="accent2">one team</span>, built to run itself.</p>
+      <p><span class="word">No</span> <span class="word">website</span> <span class="word">guy.</span> <span class="word">No</span> <span class="word">email</span> <span class="word">girl.</span> <span class="word">Just</span> <span class="word accent">one system</span>, <span class="word accent2">one team</span> <span class="word">—</span> <span class="word">built</span> <span class="word">to</span> <span class="word">run</span> <span class="word">itself.</span></p>
     </div>
   </section>
 
@@ -338,29 +767,141 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
 
       <div class="card-grid">
         <div class="card card1">
+          <div class="icon-badge icon-lime"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
           <span class="tag">01 / SITES</span>
           <h3>Web Development</h3>
           <p>Business sites, landing pages, stores — fast, mobile-ready, built to convert on day one.</p>
           <a href="#" data-nav="services" onclick="showPage('services');return false;" class="card-link">Explore services →</a>
         </div>
         <div class="card card2">
+          <div class="icon-badge icon-coral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
           <span class="tag">02 / INBOX</span>
           <h3>Email Marketing</h3>
           <p>Campaigns and newsletters people actually open, from strategy to send.</p>
           <a href="#" data-nav="services" onclick="showPage('services');return false;" class="card-link">Explore services →</a>
         </div>
         <div class="card card3">
+          <div class="icon-badge icon-pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3.5"/></svg></div>
           <span class="tag">03 / FLOWS</span>
           <h3>Automation</h3>
           <p>Welcome, cart, win-back — flows that trigger themselves and never sleep.</p>
           <a href="#" data-nav="services" onclick="showPage('services');return false;" class="card-link">Explore services →</a>
         </div>
         <div class="card card4">
+          <div class="icon-badge icon-ink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></div>
           <span class="tag">04 / PROOF</span>
           <h3>Analytics &amp; Growth</h3>
           <p>Opens, clicks, conversions — read together so every next move is backed by numbers.</p>
           <a href="#" data-nav="services" onclick="showPage('services');return false;" class="card-link">Explore services →</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDIVIDUALLY EXCELLENT -->
+  <section class="section section-tight" id="disciplines">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-eyebrow">Not just wired together</span>
+        <h2 class="section-title">Four disciplines. Each one, mastered on its own.</h2>
+        <p class="section-desc">Yes, they all connect — but each piece is strong enough to stand completely on its own. Hire us for one, or all four.</p>
+      </div>
+
+      <div class="feature-rows">
+
+        <div class="feature-row">
+          <div class="live-visual live-web">
+            <div class="chrome-bar"><span class="chrome-dot"></span><span class="chrome-dot"></span><span class="chrome-dot"></span></div>
+            <div class="live-web-content">
+              <div class="live-web-cursor"></div>
+              <div class="live-web-line w-70"></div>
+              <div class="live-web-line w-40"></div>
+              <button class="live-web-btn" type="button">Get Started</button>
+            </div>
+          </div>
+          <div class="feature-copy">
+            <span class="feature-kicker">01 — Web Development</span>
+            <h3>Websites built to convert, not just impress.</h3>
+            <p>Fast, mobile-first, and designed around one goal: turning a visitor into a customer — whether that's a landing page, a full business site, or a store.</p>
+            <ul class="feature-highlights">
+              <li>Live in as little as 2 weeks</li>
+              <li>Mobile-first, fast-loading, SEO-ready</li>
+              <li>Custom-coded, never template-locked</li>
+            </ul>
+            <a href="#" data-nav="services" onclick="showPage('services');return false;" class="feature-link">See website services →</a>
+          </div>
+        </div>
+
+        <div class="feature-row">
+          <div class="live-visual live-email">
+            <div class="live-email-row unread">
+              <span class="live-email-dot"></span>
+              <div class="live-email-text"><b>Welcome to Aavira Skin 👋</b><span>Your journey starts here...</span></div>
+              <span class="live-email-badge">NEW</span>
+            </div>
+            <div class="live-email-row"><span class="live-email-dot read"></span><div class="live-email-text"><b>Your order has shipped</b><span>Track your package in real time...</span></div></div>
+            <div class="live-email-row"><span class="live-email-dot read"></span><div class="live-email-text"><b>Complete your profile</b><span>Get picks made just for you...</span></div></div>
+          </div>
+          <div class="feature-copy">
+            <span class="feature-kicker">02 — Email Marketing</span>
+            <h3>Emails people actually want to open.</h3>
+            <p>Strategy-led campaigns and newsletters that sound like your brand, not a template — written, designed, and sent to keep your audience engaged.</p>
+            <ul class="feature-highlights">
+              <li>Copy and design, done in-house</li>
+              <li>Segmented for the right audience</li>
+              <li>Deliverability-first sending practices</li>
+            </ul>
+            <a href="#" data-nav="services" onclick="showPage('services');return false;" class="feature-link">See email services →</a>
+          </div>
+        </div>
+
+        <div class="feature-row">
+          <div class="live-visual live-automation">
+            <div class="live-flow-track">
+              <span class="live-flow-node">Trigger</span>
+              <span class="live-flow-node">Wait 2h</span>
+              <span class="live-flow-node">Send Email</span>
+              <span class="live-flow-node highlight">Convert</span>
+            </div>
+            <div class="live-flow-rail"><div class="live-flow-pulse"></div></div>
+          </div>
+          <div class="feature-copy">
+            <span class="feature-kicker">03 — Automation</span>
+            <h3>Flows that work while you sleep.</h3>
+            <p>Welcome sequences, cart recovery, win-back campaigns — automations that trigger themselves and keep leads moving without anyone lifting a finger.</p>
+            <ul class="feature-highlights">
+              <li>Welcome, cart &amp; win-back flows</li>
+              <li>CRM-integrated, zero manual entry</li>
+              <li>Set up once, runs forever</li>
+            </ul>
+            <a href="#" data-nav="services" onclick="showPage('services');return false;" class="feature-link">See automation services →</a>
+          </div>
+        </div>
+
+        <div class="feature-row">
+          <div class="live-visual live-analytics">
+            <div class="live-bars">
+              <span style="--h:40%"></span>
+              <span style="--h:65%"></span>
+              <span style="--h:50%"></span>
+              <span style="--h:80%"></span>
+              <span style="--h:95%"></span>
+            </div>
+            <span class="live-badge-up mono">↑ 24% opens this month</span>
+          </div>
+          <div class="feature-copy">
+            <span class="feature-kicker">04 — Analytics &amp; Growth</span>
+            <h3>Know exactly what's working.</h3>
+            <p>Website and email performance, read together — so every next move is backed by real numbers, not guesses.</p>
+            <ul class="feature-highlights">
+              <li>Conversion and funnel tracking</li>
+              <li>Email open and click reporting</li>
+              <li>Monthly performance reviews</li>
+            </ul>
+            <a href="#" data-nav="services" onclick="showPage('services');return false;" class="feature-link">See growth services →</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -409,23 +950,24 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
         <h2 class="section-title">One visitor, four automatic moves</h2>
         <p class="section-desc">A real flow we build — from first click to a sales rep who's already in the loop.</p>
       </div>
-      <div class="steps-wrap">
-        <div class="step">
+      <div class="process-rail"><div class="process-rail-fill" id="process-rail-fill"></div></div>
+      <div class="steps-wrap" id="how-it-works-steps">
+        <div class="step" data-step="0">
           <span class="step-num">01</span>
           <h4>Landing page</h4>
           <p>A visitor lands from an ad or a search, built around one clear goal.</p>
         </div>
-        <div class="step">
+        <div class="step" data-step="1">
           <span class="step-num">02</span>
           <h4>Contact form</h4>
           <p>Details flow straight into your CRM — no copy-pasting, no delay.</p>
         </div>
-        <div class="step">
+        <div class="step" data-step="2">
           <span class="step-num">03</span>
           <h4>Instant email</h4>
           <p>A welcome or confirmation goes out while interest is still warm.</p>
         </div>
-        <div class="step">
+        <div class="step" data-step="3">
           <span class="step-num">04</span>
           <h4>Sales follow-up</h4>
           <p>Your team gets notified, fully briefed, ready to close.</p>
@@ -437,14 +979,17 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
   <!-- TOOLS -->
   <section class="section section-tight" id="tools">
     <div class="wrap">
-      <div class="focus-panel">
-        <div class="focus-title">Tools we work with</div>
-        <p class="focus-sub">The tools change. The strategy doesn't.</p>
-        <div class="focus-pills">
-          <span class="focus-pill"><span class="num">WEB</span>VS Code · HTML · CSS · JavaScript · React · Vercel</span>
-          <span class="focus-pill"><span class="num">EMAIL</span>Klaviyo · Mailchimp · Brevo</span>
-          <span class="focus-pill"><span class="num">CRM</span>HubSpot · Apollo · Instantly · Hunter</span>
-        </div>
+      <div class="focus-title" style="text-align:center;">Tools we work with</div>
+      <p class="focus-sub" style="text-align:center; margin:0 auto 32px;">The tools change. The strategy doesn't.</p>
+    </div>
+    <div class="tools-strip" aria-hidden="true">
+      <div class="tools-strip-track">
+        <span class="tool-pill">VS Code</span><span class="tool-pill">HTML</span><span class="tool-pill">CSS</span><span class="tool-pill">JavaScript</span><span class="tool-pill">React</span><span class="tool-pill">Vercel</span>
+        <span class="tool-pill">Klaviyo</span><span class="tool-pill">Mailchimp</span><span class="tool-pill">Brevo</span>
+        <span class="tool-pill">HubSpot</span><span class="tool-pill">Apollo</span><span class="tool-pill">Instantly</span><span class="tool-pill">Hunter</span>
+        <span class="tool-pill">VS Code</span><span class="tool-pill">HTML</span><span class="tool-pill">CSS</span><span class="tool-pill">JavaScript</span><span class="tool-pill">React</span><span class="tool-pill">Vercel</span>
+        <span class="tool-pill">Klaviyo</span><span class="tool-pill">Mailchimp</span><span class="tool-pill">Brevo</span>
+        <span class="tool-pill">HubSpot</span><span class="tool-pill">Apollo</span><span class="tool-pill">Instantly</span><span class="tool-pill">Hunter</span>
       </div>
     </div>
   </section>
@@ -463,7 +1008,7 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
   <!-- FINAL CTA -->
   <section class="cta-section" id="contact-home">
     <div class="wrap">
-      <h2>Got a business that deserves <span class="hl">a system</span>, not a website?</h2>
+      <h2>Your business deserves <span class="hl">a system.</span> Not just a website.</h2>
       <p>Tell us where visitors are dropping off — we'll map the site and email flow that fixes it.</p>
       <div class="cta-actions">
         <a href="#" data-nav="start" onclick="showPage('start');return false;" class="btn-lime">Start a project →</a>
@@ -509,8 +1054,10 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
 
   <!-- 01 WEBSITES -->
   <section class="service-block">
-    <div class="wrap">
+    <div class="wrap service-grid">
+      <div class="service-copy">
       <div class="service-head">
+        <div class="icon-badge icon-lime"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
         <span class="service-num num-lime">01</span>
         <h2>Websites That Work</h2>
       </div>
@@ -526,13 +1073,25 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
         <a href="#" data-nav="start" onclick="showPage('start');return false;" class="btn-lime">Start a website project →</a>
         <a href="#contact-services" class="btn-ghost">Need something custom? Let's talk →</a>
       </div>
+      </div>
+      <div class="live-visual live-web">
+        <div class="chrome-bar"><span class="chrome-dot"></span><span class="chrome-dot"></span><span class="chrome-dot"></span></div>
+        <div class="live-web-content">
+          <div class="live-web-cursor"></div>
+          <div class="live-web-line w-70"></div>
+          <div class="live-web-line w-40"></div>
+          <button class="live-web-btn" type="button">Get Started</button>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- 02 EMAIL -->
   <section class="service-block">
-    <div class="wrap">
+    <div class="wrap service-grid">
+      <div class="service-copy">
       <div class="service-head">
+        <div class="icon-badge icon-coral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
         <span class="service-num num-coral">02</span>
         <h2>Email Experiences That Connect</h2>
       </div>
@@ -548,13 +1107,25 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
         <a href="#" data-nav="start" onclick="showPage('start');return false;" class="btn-lime">Start an email project →</a>
         <a href="#contact-services" class="btn-ghost">Let's build your email system →</a>
       </div>
+      </div>
+      <div class="live-visual live-email">
+        <div class="live-email-row unread">
+          <span class="live-email-dot"></span>
+          <div class="live-email-text"><b>Welcome to Aavira Skin 👋</b><span>Your journey starts here...</span></div>
+          <span class="live-email-badge">NEW</span>
+        </div>
+        <div class="live-email-row"><span class="live-email-dot read"></span><div class="live-email-text"><b>Your order has shipped</b><span>Track your package in real time...</span></div></div>
+        <div class="live-email-row"><span class="live-email-dot read"></span><div class="live-email-text"><b>Complete your profile</b><span>Get picks made just for you...</span></div></div>
+      </div>
     </div>
   </section>
 
   <!-- 03 AUTOMATION -->
   <section class="service-block">
-    <div class="wrap">
+    <div class="wrap service-grid">
+      <div class="service-copy">
       <div class="service-head">
+        <div class="icon-badge icon-pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3.5"/></svg></div>
         <span class="service-num num-pink">03</span>
         <h2>Automation That Works For You</h2>
       </div>
@@ -571,13 +1142,25 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
         <a href="#" data-nav="start" onclick="showPage('start');return false;" class="btn-lime">Automate my business →</a>
         <a href="#contact-services" class="btn-ghost">Talk about automation →</a>
       </div>
+      </div>
+      <div class="live-visual live-automation">
+        <div class="live-flow-track">
+          <span class="live-flow-node">Trigger</span>
+          <span class="live-flow-node">Wait 2h</span>
+          <span class="live-flow-node">Send Email</span>
+          <span class="live-flow-node highlight">Convert</span>
+        </div>
+        <div class="live-flow-rail"><div class="live-flow-pulse"></div></div>
+      </div>
     </div>
   </section>
 
   <!-- 04 GROWTH -->
   <section class="service-block">
-    <div class="wrap">
+    <div class="wrap service-grid">
+      <div class="service-copy">
       <div class="service-head">
+        <div class="icon-badge icon-ink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></div>
         <span class="service-num num-ink">04</span>
         <h2>Growth You Can Measure</h2>
       </div>
@@ -592,6 +1175,17 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
       <div class="hero-actions">
         <a href="#" data-nav="start" onclick="showPage('start');return false;" class="btn-lime">Improve my performance →</a>
         <a href="#contact-services" class="btn-ghost">Let's talk growth →</a>
+      </div>
+      </div>
+      <div class="live-visual live-analytics">
+        <div class="live-bars">
+          <span style="--h:40%"></span>
+          <span style="--h:65%"></span>
+          <span style="--h:50%"></span>
+          <span style="--h:80%"></span>
+          <span style="--h:95%"></span>
+        </div>
+        <span class="live-badge-up mono">↑ 24% opens this month</span>
       </div>
     </div>
   </section>
@@ -628,22 +1222,22 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
       </div>
       <div class="option-grid">
         <a href="#" data-nav="start" onclick="showPage('start');return false;" class="option-card">
-          <span class="emoji">🌐</span>
+          <div class="icon-badge icon-lime"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
           <h4>Website</h4>
           <p>I need a website or landing page.</p>
         </a>
         <a href="#" data-nav="start" onclick="showPage('start');return false;" class="option-card">
-          <span class="emoji">✉️</span>
+          <div class="icon-badge icon-coral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
           <h4>Email</h4>
           <p>I need email marketing or campaigns.</p>
         </a>
         <a href="#" data-nav="start" onclick="showPage('start');return false;" class="option-card">
-          <span class="emoji">⚙️</span>
+          <div class="icon-badge icon-pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3.5"/></svg></div>
           <h4>Automation</h4>
           <p>I want to automate my customer journey.</p>
         </a>
         <a href="#" data-nav="start" onclick="showPage('start');return false;" class="option-card">
-          <span class="emoji">📈</span>
+          <div class="icon-badge icon-ink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></div>
           <h4>Growth</h4>
           <p>I want to improve my existing digital performance.</p>
         </a>
@@ -689,6 +1283,11 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
 
       <!-- FLAGSHIP CASE STUDY -->
       <a href="#" data-nav="case" onclick="showPage('case');return false;" class="work-card wc-pink" style="display:block; min-height:auto; padding:40px 36px; margin-bottom:28px;">
+          <span class="work-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+        <div class="case-preview-frame-wrap" id="flagship-preview-wrap">
+          <iframe id="flagship-preview-frame" title="Aavira Skin live preview" loading="lazy" tabindex="-1"></iframe>
+          <div class="case-preview-overlay"><span>Live preview — click to open full case study →</span></div>
+        </div>
         <span class="work-num mono">FEATURED CASE STUDY</span>
         <h3 style="font-size:1.9rem;">Aavira Skin — See Nirmaviyo in Action</h3>
         <p style="max-width:60ch;">A full end-to-end demo built for a fictional skincare brand — website, email flow timeline, audience segmentation, and a live analytics dashboard, all working as one connected system.</p>
@@ -699,7 +1298,12 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
       </a>
 
       <div class="work-grid">
-        <div class="work-card wc-lime">
+        <div class="work-card wc-lime" style="display:block; justify-content:normal;">
+          <span class="work-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+          <div class="work-thumb">
+            <div class="chrome-bar"><span class="chrome-dot"></span><span class="chrome-dot"></span><span class="chrome-dot"></span></div>
+            <div class="work-thumb-bars"><span></span><span></span><span></span></div>
+          </div>
           <span class="work-num mono">PROJECT 01</span>
           <h3>E-commerce Website</h3>
           <p>A storefront rebuilt around a single conversion goal, with checkout confirmation and cart-recovery emails wired directly into the flow.</p>
@@ -708,7 +1312,12 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
           </div>
         </div>
 
-        <div class="work-card wc-coral">
+        <div class="work-card wc-coral" style="display:block; justify-content:normal;">
+          <span class="work-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+          <div class="work-thumb">
+            <div class="chrome-bar"><span class="chrome-dot"></span><span class="chrome-dot"></span><span class="chrome-dot"></span></div>
+            <div class="work-thumb-bars"><span></span><span></span><span></span></div>
+          </div>
           <span class="work-num mono">PROJECT 02</span>
           <h3>SaaS Landing Page</h3>
           <p>A trial sign-up page built for one job: get a visitor to start a trial, then hand them straight to an onboarding email sequence.</p>
@@ -717,7 +1326,12 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
           </div>
         </div>
 
-        <div class="work-card wc-ink">
+        <div class="work-card wc-ink" style="display:block; justify-content:normal;">
+          <span class="work-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+          <div class="work-thumb">
+            <div class="chrome-bar"><span class="chrome-dot"></span><span class="chrome-dot"></span><span class="chrome-dot"></span></div>
+            <div class="work-thumb-bars"><span></span><span></span><span></span></div>
+          </div>
           <span class="work-num mono">PROJECT 03</span>
           <h3>Website + Email Integration</h3>
           <p>One connected system: a business website, CRM, and inbox reading off the same customer data, from first visit to repeat purchase.</p>
@@ -855,6 +1469,10 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
         </div>
 
         <div class="form-card">
+          <div class="form-progress-wrap">
+            <div class="form-progress-rail"><div class="form-progress-fill" id="form-progress-fill"></div></div>
+            <span class="form-progress-label mono" id="form-progress-label">0% complete</span>
+          </div>
           <form id="project-form" action="https://formsubmit.co/ajax/nirmaviyo@gmail.com" method="POST">
             <input type="hidden" name="_subject" value="New Project Enquiry — Nirmaviyo Website">
             <input type="hidden" name="_template" value="table">
@@ -1052,6 +1670,73 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
 
     window.scrollTo(0,0);
     if(PAGE_TITLES[name]){ document.title = PAGE_TITLES[name]; }
+    initReveal(target);
+    initFlowDiagrams(target);
+  }
+
+  // Sequential draw-in for connected-system flow diagrams (nodes then
+  // arrows, staggered) — used on Services "What we build" / "One
+  // Connected System" panels.
+  var flowObserver = null;
+  function initFlowDiagrams(scope){
+    scope = scope || document;
+    var diagrams = scope.querySelectorAll('.flow-diagram');
+    if(!diagrams.length) return;
+    if(!('IntersectionObserver' in window)){
+      diagrams.forEach(function(d){
+        d.querySelectorAll('.node, .arrow').forEach(function(el){ el.classList.add('visible'); });
+      });
+      return;
+    }
+    if(!flowObserver){
+      flowObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(!entry.isIntersecting) return;
+          var kids = entry.target.querySelectorAll('.node, .arrow');
+          kids.forEach(function(el, i){
+            el.style.transitionDelay = (i * 90) + 'ms';
+            el.classList.add('visible');
+          });
+          flowObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.3 });
+    }
+    diagrams.forEach(function(d){
+      d.querySelectorAll('.node, .arrow').forEach(function(el){ el.classList.remove('visible'); });
+      flowObserver.observe(d);
+    });
+  }
+
+  // Scroll-reveal: fades/slides in section heads, cards, steps, etc. as
+  // they enter the viewport. Auto-tags common content blocks so we don't
+  // need to hand-edit every section with a class.
+  var revealObserver = null;
+  function initReveal(scope){
+    scope = scope || document;
+    var selectors = '.section-head, .card, .step, .work-card, .option-card, .belief-item, .founder-card, .focus-panel, .system-panel, .stat-block, .form-side, .form-card, .chip-grid, .preview-panel, .feature-row, .live-visual';
+    var els = scope.querySelectorAll(selectors);
+    els.forEach(function(el, i){
+      if(!el.classList.contains('reveal')){
+        el.classList.add('reveal');
+        el.style.transitionDelay = Math.min(i * 40, 240) + 'ms';
+      }
+      el.classList.remove('visible');
+    });
+
+    if(!('IntersectionObserver' in window)){
+      els.forEach(function(el){ el.classList.add('visible'); });
+      return;
+    }
+    if(revealObserver){ revealObserver.disconnect(); }
+    revealObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function(el){ revealObserver.observe(el); });
   }
 
   // Some embedded/sandboxed preview environments block the History API
@@ -1102,8 +1787,300 @@ footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z
     safeReplaceState(initial);
     renderPage(initial);
 
+    // ---- scroll progress bar + header shrink ----
+    var progressBar = document.getElementById('scroll-progress');
+    var headerEl = document.querySelector('header');
+    window.addEventListener('scroll', function(){
+      var scrollTop = window.scrollY || document.documentElement.scrollTop;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      if(progressBar){ progressBar.style.width = pct + '%'; }
+      if(headerEl){ headerEl.classList.toggle('scrolled', scrollTop > 12); }
+    }, { passive: true });
+
+    // ---- hero cursor spotlight ----
+    var heroSpot = document.getElementById('home-hero-spotlight');
+    if(heroSpot){
+      heroSpot.addEventListener('mousemove', function(e){
+        var rect = heroSpot.getBoundingClientRect();
+        var x = ((e.clientX - rect.left) / rect.width) * 100;
+        var y = ((e.clientY - rect.top) / rect.height) * 100;
+        heroSpot.style.setProperty('--mx', x + '%');
+        heroSpot.style.setProperty('--my', y + '%');
+      });
+    }
+
+    // ---- tilt-on-hover for cards ----
+    function attachTilt(scope){
+      var tiltEls = (scope || document).querySelectorAll('.card, .work-card, .option-card, .founder-card');
+      tiltEls.forEach(function(el){
+        if(el.getAttribute('data-tilt-bound')) return;
+        el.setAttribute('data-tilt-bound', 'true');
+        el.addEventListener('mousemove', function(e){
+          var rect = el.getBoundingClientRect();
+          var px = (e.clientX - rect.left) / rect.width - 0.5;
+          var py = (e.clientY - rect.top) / rect.height - 0.5;
+          el.style.setProperty('--ry', (px * 8) + 'deg');
+          el.style.setProperty('--rx', (py * -8) + 'deg');
+        });
+        el.addEventListener('mouseleave', function(){
+          el.style.setProperty('--rx', '0deg');
+          el.style.setProperty('--ry', '0deg');
+        });
+      });
+    }
+    attachTilt(document);
+
+    // ---- pledge line: word-by-word reveal on scroll ----
+    (function(){
+      var pledgeWords = document.querySelectorAll('.pledge .word');
+      if(!pledgeWords.length) return;
+      if(!('IntersectionObserver' in window)){
+        pledgeWords.forEach(function(w){ w.classList.add('visible'); });
+        return;
+      }
+      var pledgeObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(!entry.isIntersecting) return;
+          var words = entry.target.querySelectorAll('.word');
+          words.forEach(function(w, i){
+            setTimeout(function(){ w.classList.add('visible'); }, i * 55);
+          });
+          pledgeObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.6 });
+      pledgeObserver.observe(document.querySelector('.pledge'));
+    })();
+
+    // ---- belief list: alternating slide-in + growing connector line ----
+    (function(){
+      var beliefList = document.querySelector('.belief-list');
+      if(!beliefList) return;
+      var items = beliefList.querySelectorAll('.belief-item');
+      if(!('IntersectionObserver' in window)){
+        beliefList.classList.add('visible');
+        items.forEach(function(it){ it.classList.add('belief-in'); });
+        return;
+      }
+      var beliefObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(!entry.isIntersecting) return;
+          entry.target.classList.add('visible');
+          items.forEach(function(it, i){
+            setTimeout(function(){ it.classList.add('belief-in'); }, i * 140);
+          });
+          beliefObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.3 });
+      beliefObserver.observe(beliefList);
+    })();
+
+    // ---- flagship case-study card: lazy-load the live mini preview ----
+    (function(){
+      var wrap = document.getElementById('flagship-preview-wrap');
+      var frame = document.getElementById('flagship-preview-frame');
+      if(!wrap || !frame) return;
+      if(!('IntersectionObserver' in window)){
+        frame.srcdoc = b64DecodeUnicode(CASE_STUDY_B64);
+        return;
+      }
+      var flagshipObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting && !frame.getAttribute('data-loaded')){
+            frame.srcdoc = b64DecodeUnicode(CASE_STUDY_B64);
+            frame.setAttribute('data-loaded', 'true');
+            flagshipObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      flagshipObserver.observe(wrap);
+    })();
+
+    // ---- reduced motion / touch detection ----
+    var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var isFinePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+
+    // ---- hero mouse-parallax on preview panel ----
+    if(!prefersReducedMotion && isFinePointer){
+      var heroSection = document.getElementById('home-hero-spotlight');
+      var parallaxPanel = document.getElementById('hero-parallax-panel');
+      if(heroSection && parallaxPanel){
+        heroSection.addEventListener('mousemove', function(e){
+          var rect = heroSection.getBoundingClientRect();
+          var px = (e.clientX - rect.left) / rect.width - 0.5;
+          var py = (e.clientY - rect.top) / rect.height - 0.5;
+          parallaxPanel.style.setProperty('--px', (px * 14) + 'px');
+          parallaxPanel.style.setProperty('--py', (py * 10) + 'px');
+        });
+        heroSection.addEventListener('mouseleave', function(){
+          parallaxPanel.style.setProperty('--px', '0px');
+          parallaxPanel.style.setProperty('--py', '0px');
+        });
+      }
+    }
+
+    // ---- custom cursor (desktop, fine pointer, motion allowed) ----
+    if(!prefersReducedMotion && isFinePointer){
+      var cursorDot = document.getElementById('cursor-dot');
+      var cursorRing = document.getElementById('cursor-ring');
+      if(cursorDot && cursorRing){
+        document.body.classList.add('has-custom-cursor');
+        var ringX = 0, ringY = 0, targetX = 0, targetY = 0;
+        window.addEventListener('mousemove', function(e){
+          targetX = e.clientX; targetY = e.clientY;
+          cursorDot.style.left = targetX + 'px';
+          cursorDot.style.top = targetY + 'px';
+        });
+        function ringLoop(){
+          ringX += (targetX - ringX) * 0.18;
+          ringY += (targetY - ringY) * 0.18;
+          cursorRing.style.left = ringX + 'px';
+          cursorRing.style.top = ringY + 'px';
+          requestAnimationFrame(ringLoop);
+        }
+        requestAnimationFrame(ringLoop);
+
+        document.addEventListener('mouseover', function(e){
+          if(e.target.closest('a, button, .card, .work-card, .option-card, .live-web-btn, input, textarea, label')){
+            cursorRing.classList.add('cursor-active');
+          }
+        });
+        document.addEventListener('mouseout', function(e){
+          if(e.target.closest('a, button, .card, .work-card, .option-card, .live-web-btn, input, textarea, label')){
+            cursorRing.classList.remove('cursor-active');
+          }
+        });
+      }
+    }
+
+    // ---- "How it works" scroll-linked progress rail + active step ----
+    function updateProcessRail(){
+      var wrap = document.getElementById('how-it-works-steps');
+      var fill = document.getElementById('process-rail-fill');
+      if(!wrap || !fill) return;
+      var rect = wrap.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var total = rect.height + vh;
+      var passed = vh - rect.top;
+      var progress = Math.max(0, Math.min(1, passed / total));
+      fill.style.width = (progress * 100) + '%';
+      var steps = wrap.querySelectorAll('.step');
+      var activeIndex = Math.min(steps.length - 1, Math.floor(progress * steps.length));
+      steps.forEach(function(s, i){
+        s.classList.toggle('step-active', i === activeIndex && progress > 0.02 && progress < 0.99);
+      });
+    }
+    window.addEventListener('scroll', updateProcessRail, { passive: true });
+    updateProcessRail();
+
+
+    // ---- count-up animation for hero stat numbers ----
+    function animateCount(el){
+      var target = parseInt(el.textContent, 10);
+      if(isNaN(target)){ return; }
+      var start = 0;
+      var duration = 900;
+      var startTime = null;
+      function step(ts){
+        if(!startTime){ startTime = ts; }
+        var progress = Math.min((ts - startTime) / duration, 1);
+        el.textContent = Math.floor(progress * target);
+        if(progress < 1){ requestAnimationFrame(step); }
+        else{ el.textContent = target; }
+      }
+      requestAnimationFrame(step);
+    }
+    var statEls = document.querySelectorAll('.hero-stat b');
+    if('IntersectionObserver' in window && statEls.length){
+      var statObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            animateCount(entry.target);
+            statObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      statEls.forEach(function(el){ statObserver.observe(el); });
+    }
+
+    // ---- count-up for the stats-bar (with prefix/suffix support, e.g. "2wk", "100%") ----
+    function animateCountUp(el){
+      var target = parseInt(el.getAttribute('data-countup'), 10);
+      if(isNaN(target)){ return; }
+      var prefix = el.getAttribute('data-prefix') || '';
+      var suffix = el.getAttribute('data-suffix') || '';
+      var duration = 1000;
+      var startTime = null;
+      function step(ts){
+        if(!startTime){ startTime = ts; }
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = prefix + Math.floor(eased * target) + suffix;
+        if(progress < 1){ requestAnimationFrame(step); }
+        else{ el.textContent = prefix + target + suffix; }
+      }
+      requestAnimationFrame(step);
+    }
+    var countUpEls = document.querySelectorAll('[data-countup]');
+    if('IntersectionObserver' in window && countUpEls.length){
+      var countUpObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            animateCountUp(entry.target);
+            countUpObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      countUpEls.forEach(function(el){ countUpObserver.observe(el); });
+    } else {
+      countUpEls.forEach(function(el){
+        var t = el.getAttribute('data-countup');
+        el.textContent = (el.getAttribute('data-prefix')||'') + t + (el.getAttribute('data-suffix')||'');
+      });
+    }
+
     var form = document.getElementById('project-form');
     if(form){
+      // ---- progress bar + field-complete checkmarks ----
+      var progressFill = document.getElementById('form-progress-fill');
+      var progressLabel = document.getElementById('form-progress-label');
+      var textFields = form.querySelectorAll('.field input[required], .field textarea[required]');
+      var radioGroupNames = ['budget', 'timeline', 'decision-maker', 'source'];
+
+      function updateFormProgress(){
+        var total = textFields.length + radioGroupNames.length;
+        var complete = 0;
+
+        textFields.forEach(function(input){
+          var fieldWrap = input.closest('.field');
+          var filled = input.value.trim().length > 0;
+          if(fieldWrap){ fieldWrap.classList.toggle('field-complete', filled); }
+          if(filled){ complete++; }
+        });
+
+        radioGroupNames.forEach(function(name){
+          var checked = form.querySelector('input[name="' + name + '"]:checked');
+          var anyRadio = form.querySelector('input[name="' + name + '"]');
+          var section = anyRadio ? anyRadio.closest('.form-section') : null;
+          if(section){ section.classList.toggle('section-answered', !!checked); }
+          if(checked){ complete++; }
+        });
+
+        var pct = total > 0 ? Math.round((complete / total) * 100) : 0;
+        if(progressFill){ progressFill.style.width = pct + '%'; }
+        if(progressLabel){ progressLabel.textContent = pct + '% complete'; }
+      }
+
+      textFields.forEach(function(input){
+        input.addEventListener('input', updateFormProgress);
+      });
+      radioGroupNames.forEach(function(name){
+        form.querySelectorAll('input[name="' + name + '"]').forEach(function(radio){
+          radio.addEventListener('change', updateFormProgress);
+        });
+      });
+      updateFormProgress();
+
       form.addEventListener('submit', function(e){
         e.preventDefault();
         var submitBtn = form.querySelector('button[type="submit"]');

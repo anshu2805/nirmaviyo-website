@@ -13,21 +13,22 @@
    Minimal, dark, single-accent aesthetic (SingleStore-inspired)
    ============================================================ */
 :root{
-  --bg: #0a0a0e;
-  --bg-2: #131318;
-  --bg-3: #1b1b22;
-  --ink: #f4f4f6;
-  --muted: #8f8f9c;
-  --lime: #b6ff3f;
-  --coral: #ff7a5c;
-  --pink: #c48bff;
-  --border: rgba(244,244,246,0.09);
-  --border-strong: rgba(244,244,246,0.18);
+  --bg: #100e17;
+  --bg-2: #17141f;
+  --bg-3: #1f1b29;
+  --ink: #f6f4fa;
+  --muted: #948fa3;
+  --lime: #8b5cf6;
+  --coral: #f0b849;
+  --pink: #ec4899;
+  --grad-primary: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  --border: rgba(246,244,250,0.09);
+  --border-strong: rgba(246,244,250,0.18);
 }
 *{box-sizing:border-box; margin:0; padding:0;}
-html{scroll-behavior:smooth; background:#0a0a0e;}
+html{scroll-behavior:smooth; background:#100e17;}
 body{
-  background:#0a0a0e;
+  background:#100e17;
   background:var(--bg);
   color:var(--ink);
   font-family:'Manrope', sans-serif;
@@ -47,8 +48,8 @@ ul{ list-style:none; }
 .bg-glow{
   position:fixed; inset:0; z-index:0; pointer-events:none;
   background:
-    radial-gradient(900px 560px at 82% -6%, rgba(182,255,63,0.08), transparent 60%),
-    radial-gradient(700px 520px at 8% 20%, rgba(196,139,255,0.06), transparent 60%);
+    radial-gradient(900px 560px at 82% -6%, rgba(139,92,246,0.08), transparent 60%),
+    radial-gradient(700px 520px at 8% 20%, rgba(236,72,153,0.06), transparent 60%);
 }
 
 /* ---------- HEADER / NAV ---------- */
@@ -62,8 +63,8 @@ nav{ display:flex; align-items:center; justify-content:space-between; padding:20
 .nav-divider{ color:var(--border-strong); font-size:0.8rem; }
 .nav-start-link{ color:var(--lime) !important; font-weight:600; }
 .nav-start-link:hover{ opacity:0.85; }
-.nav-cta{ font-size:0.82rem; font-weight:600; padding:11px 22px; border-radius:8px; background:var(--lime); color:#0a0a0e; transition:opacity .2s, transform .2s; display:inline-block; }
-.nav-cta:hover{ opacity:0.88; transform:translateY(-1px); }
+.nav-cta{ font-size:0.82rem; font-weight:600; padding:11px 22px; border-radius:8px; background:var(--grad-primary); background-size:180% 180%; color:#ffffff; transition:opacity .2s, transform .2s, background-position .5s ease; display:inline-block; }
+.nav-cta:hover{ background-position:100% 50%; transform:translateY(-1px); }
 .nav-cta-mobile{ display:none; }
 @media (max-width:780px){
   .nav-links{ display:none; }
@@ -80,10 +81,18 @@ h1.hero-title .line2{ color:var(--lime); }
 h1.hero-title .line3{ color:var(--ink); border-bottom:2px solid var(--coral); padding-bottom:2px; }
 .hero-sub{ font-size:1.08rem; color:var(--muted); max-width:46ch; line-height:1.65; margin-bottom:36px; font-weight:400; }
 .hero-actions{ display:flex; gap:12px; flex-wrap:wrap; }
-.btn-lime{ background:var(--lime); color:#0a0a0e; font-weight:600; padding:14px 28px; border-radius:8px; font-size:0.92rem; transition:opacity .2s, transform .2s; display:inline-block; border:none; cursor:pointer; font-family:'Manrope',sans-serif; }
-.btn-lime:hover{ opacity:0.88; transform:translateY(-1px); }
+.btn-lime{ background:var(--grad-primary); background-size:180% 180%; background-position:0% 50%; color:#ffffff; font-weight:600; padding:14px 28px; border-radius:8px; font-size:0.92rem; transition:opacity .2s, transform .2s, background-position .5s ease, box-shadow .3s ease; display:inline-block; border:none; cursor:pointer; font-family:'Manrope',sans-serif; position:relative; overflow:hidden; box-shadow:0 4px 20px rgba(139,92,246,0.25); }
+.btn-lime:hover{ background-position:100% 50%; transform:translateY(-2px); box-shadow:0 8px 28px rgba(139,92,246,0.4), 0 4px 14px rgba(236,72,153,0.25); }
+.btn-lime::after{
+  content:''; position:absolute; top:0; left:-75%; width:50%; height:100%;
+  background:linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform:skewX(-20deg); transition:left .6s ease;
+}
+.btn-lime:hover::after{ left:125%; }
 .btn-ghost{ border:1px solid var(--border-strong); padding:13px 27px; border-radius:8px; font-size:0.92rem; font-weight:600; transition:border-color .2s, background .2s; display:inline-block; }
-.btn-ghost:hover{ border-color:var(--lime); background:rgba(182,255,63,0.05); }
+.btn-primary-cta{ font-size:1rem; padding:16px 30px; box-shadow:0 8px 30px rgba(139,92,246,0.18); }
+.hero-cta-sub{ font-size:0.85rem; color:var(--muted); max-width:42ch; line-height:1.5; }
+.btn-ghost:hover{ border-color:var(--lime); background:rgba(139,92,246,0.05); }
 
 .page-eyebrow{ font-family:'Space Mono'; font-size:0.78rem; color:var(--lime); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:18px; display:block; }
 
@@ -252,7 +261,7 @@ h1.hero-title .line3{ color:var(--ink); border-bottom:2px solid var(--coral); pa
 .check-grid, .radio-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
 @media (max-width:520px){ .check-grid, .radio-grid{ grid-template-columns:1fr; } }
 .check-option, .radio-option{ display:flex; align-items:center; gap:10px; border:1px solid var(--border-strong); border-radius:8px; padding:12px 14px; font-size:0.89rem; cursor:pointer; transition:border-color .2s, background .2s; color:var(--ink); }
-.check-option:has(input:checked), .radio-option:has(input:checked){ border-color:var(--lime); background:rgba(182,255,63,0.06); }
+.check-option:has(input:checked), .radio-option:has(input:checked){ border-color:var(--lime); background:rgba(139,92,246,0.06); }
 .check-option input, .radio-option input{ accent-color:var(--lime); width:16px; height:16px; flex-shrink:0; }
 .form-submit-row{ margin-top:8px; }
 .form-fine-print{ color:var(--muted); font-size:0.79rem; margin-top:14px; line-height:1.5; }
@@ -286,7 +295,7 @@ h1.hero-title .line3{ color:var(--ink); border-bottom:2px solid var(--coral); pa
 footer{ border-top:1px solid var(--border); padding:36px 0; position:relative; z-index:1; overflow:hidden; }
 footer::before{
   content:''; position:absolute; left:50%; top:-60px; width:600px; height:160px; transform:translateX(-50%);
-  background:radial-gradient(circle, rgba(182,255,63,0.07), transparent 70%); pointer-events:none;
+  background:radial-gradient(circle, rgba(139,92,246,0.07), transparent 70%); pointer-events:none;
 }
 .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
 .footer-row .mono{ font-size:0.78rem; color:var(--muted); }
@@ -377,7 +386,7 @@ div:nth-child(2).preview-connector::after{ animation-delay:0s; }
 .preview-flow > .preview-connector:nth-of-type(4)::after{ animation-delay:1.6s; }
 @keyframes growLine{ 0%{ height:0%; } 40%{ height:100%; } 100%{ height:100%; } }
 .preview-node.highlight .dot-lime{ animation:dotGlow 1.6s ease-in-out infinite; }
-@keyframes dotGlow{ 0%,100%{ box-shadow:0 0 0 0 rgba(182,255,63,0.5); } 50%{ box-shadow:0 0 0 6px rgba(182,255,63,0); } }
+@keyframes dotGlow{ 0%,100%{ box-shadow:0 0 0 0 rgba(139,92,246,0.5); } 50%{ box-shadow:0 0 0 6px rgba(139,92,246,0); } }
 
 /* stats bar section */
 .stats-bar{ border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:0; }
@@ -421,9 +430,9 @@ header.scrolled nav{ padding:13px 0; }
 
 /* floating gradient orbs behind everything */
 .orb{ position:fixed; border-radius:50%; filter:blur(90px); z-index:0; pointer-events:none; opacity:0.5; }
-.orb-1{ width:520px; height:520px; background:radial-gradient(circle, rgba(182,255,63,0.22), transparent 70%); top:-140px; right:-100px; animation:orbFloat1 26s ease-in-out infinite; }
-.orb-2{ width:460px; height:460px; background:radial-gradient(circle, rgba(196,139,255,0.18), transparent 70%); bottom:-120px; left:-120px; animation:orbFloat2 30s ease-in-out infinite; }
-.orb-3{ width:340px; height:340px; background:radial-gradient(circle, rgba(255,122,92,0.14), transparent 70%); top:40%; left:50%; animation:orbFloat3 34s ease-in-out infinite; }
+.orb-1{ width:520px; height:520px; background:radial-gradient(circle, rgba(139,92,246,0.22), transparent 70%); top:-140px; right:-100px; animation:orbFloat1 26s ease-in-out infinite; }
+.orb-2{ width:460px; height:460px; background:radial-gradient(circle, rgba(236,72,153,0.18), transparent 70%); bottom:-120px; left:-120px; animation:orbFloat2 30s ease-in-out infinite; }
+.orb-3{ width:340px; height:340px; background:radial-gradient(circle, rgba(240,184,73,0.14), transparent 70%); top:40%; left:50%; animation:orbFloat3 34s ease-in-out infinite; }
 @keyframes orbFloat1{ 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(-60px,50px) scale(1.12); } }
 @keyframes orbFloat2{ 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(50px,-40px) scale(1.08); } }
 @keyframes orbFloat3{ 0%,100%{ transform:translate(-50%,0) scale(1); } 50%{ transform:translate(-50%,-60px) scale(1.15); } }
@@ -447,7 +456,7 @@ header.scrolled nav{ padding:13px 0; }
 
 /* cursor spotlight inside hero */
 .hero{ position:relative; }
-.spotlight{ position:absolute; inset:0; pointer-events:none; z-index:0; opacity:0; transition:opacity .3s ease; background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%), rgba(182,255,63,0.09), transparent 65%); }
+.spotlight{ position:absolute; inset:0; pointer-events:none; z-index:0; opacity:0; transition:opacity .3s ease; background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%), rgba(139,92,246,0.09), transparent 65%); }
 .hero:hover .spotlight{ opacity:1; }
 .hero > *{ position:relative; z-index:1; }
 
@@ -471,6 +480,39 @@ header.scrolled nav{ padding:13px 0; }
 .hero-stat b{ font-variant-numeric:tabular-nums; }
 
 /* ============================================================
+   WHY CHOOSE US — SingleStore-style comparison pair
+   ============================================================ */
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+@media (max-width:780px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-card{ background:var(--bg-2); padding:36px 32px; }
+.compare-before{ opacity:0.75; }
+.compare-after{ position:relative; }
+.compare-after::before{ content:''; position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 0 1px rgba(139,92,246,0.25); }
+.compare-label{ display:block; font-size:0.74rem; letter-spacing:0.08em; color:var(--muted); margin-bottom:22px; }
+.compare-after .compare-label{ color:var(--lime); }
+.compare-row{ display:flex; align-items:flex-start; gap:12px; font-size:0.95rem; color:var(--ink); padding:11px 0; border-top:1px solid var(--border); line-height:1.4; }
+.compare-row:first-of-type{ border-top:none; }
+.compare-x{ color:var(--coral); font-weight:700; flex-shrink:0; }
+.compare-check{ color:var(--lime); font-weight:700; flex-shrink:0; }
+
+/* ============================================================
+   FAQ ACCORDION
+   ============================================================ */
+.faq-list{ display:flex; flex-direction:column; border-top:1px solid var(--border); }
+.faq-item{ border-bottom:1px solid var(--border); }
+.faq-question{
+  width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px;
+  background:none; border:none; padding:24px 4px; text-align:left; cursor:pointer;
+  font-family:'Manrope'; font-size:1rem; font-weight:600; color:var(--ink);
+}
+.faq-question:hover{ color:var(--lime); }
+.faq-toggle{ font-family:'Space Mono'; font-size:1.2rem; color:var(--lime); flex-shrink:0; transition:transform .3s ease; }
+.faq-item.open .faq-toggle{ transform:rotate(45deg); }
+.faq-answer{ max-height:0; overflow:hidden; transition:max-height .35s ease; }
+.faq-answer p{ color:var(--muted); font-size:0.95rem; line-height:1.6; padding:0 4px 22px; max-width:65ch; }
+.faq-item.open .faq-answer{ max-height:200px; }
+
+/* ============================================================
    LIVE VISUALS — small animated mockups per discipline
    ============================================================ */
 .live-visual{ background:rgba(255,255,255,0.035); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid var(--border); border-radius:14px; padding:22px 24px; position:relative; overflow:hidden; }
@@ -480,22 +522,22 @@ header.scrolled nav{ padding:13px 0; }
 .live-web-line{ height:9px; border-radius:4px; background:var(--border-strong); margin-bottom:10px; }
 .live-web-line.w-70{ width:70%; }
 .live-web-line.w-40{ width:40%; margin-bottom:22px; }
-.live-web-btn{ font-family:'Manrope'; font-size:0.82rem; font-weight:700; background:var(--lime); color:#0a0a0e; border:none; padding:9px 20px; border-radius:7px; position:relative; }
-.live-web-btn::after{ content:''; position:absolute; inset:0; border-radius:7px; box-shadow:0 0 0 0 rgba(182,255,63,0.55); animation:webPulse 2.4s ease-out infinite; }
-@keyframes webPulse{ 0%{ box-shadow:0 0 0 0 rgba(182,255,63,0.45); } 70%{ box-shadow:0 0 0 14px rgba(182,255,63,0); } 100%{ box-shadow:0 0 0 0 rgba(182,255,63,0); } }
+.live-web-btn{ font-family:'Manrope'; font-size:0.82rem; font-weight:700; background:var(--grad-primary); color:#ffffff; border:none; padding:9px 20px; border-radius:7px; position:relative; }
+.live-web-btn::after{ content:''; position:absolute; inset:0; border-radius:7px; box-shadow:0 0 0 0 rgba(139,92,246,0.55); animation:webPulse 2.4s ease-out infinite; }
+@keyframes webPulse{ 0%{ box-shadow:0 0 0 0 rgba(139,92,246,0.45); } 70%{ box-shadow:0 0 0 14px rgba(139,92,246,0); } 100%{ box-shadow:0 0 0 0 rgba(139,92,246,0); } }
 .live-web-cursor{ position:absolute; width:12px; height:12px; border:1.5px solid var(--ink); border-radius:50% 50% 50% 0; transform:rotate(-45deg); left:8%; top:6px; animation:cursorMove 3.4s ease-in-out infinite; opacity:0.85; }
 @keyframes cursorMove{ 0%,10%{ left:8%; top:6px; } 55%,65%{ left:32%; top:64px; } 100%{ left:8%; top:6px; } }
 
 /* Email widget */
 .live-email-row{ display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid var(--border); }
 .live-email-row:last-child{ border-bottom:none; }
-.live-email-dot{ width:8px; height:8px; border-radius:50%; background:var(--lime); flex-shrink:0; box-shadow:0 0 0 0 rgba(182,255,63,0.5); animation:emailPulse 2.2s ease-out infinite; }
+.live-email-dot{ width:8px; height:8px; border-radius:50%; background:var(--lime); flex-shrink:0; box-shadow:0 0 0 0 rgba(139,92,246,0.5); animation:emailPulse 2.2s ease-out infinite; }
 .live-email-dot.read{ background:var(--border-strong); animation:none; }
-@keyframes emailPulse{ 0%{ box-shadow:0 0 0 0 rgba(182,255,63,0.5); } 70%{ box-shadow:0 0 0 8px rgba(182,255,63,0); } 100%{ box-shadow:0 0 0 0 rgba(182,255,63,0); } }
+@keyframes emailPulse{ 0%{ box-shadow:0 0 0 0 rgba(139,92,246,0.5); } 70%{ box-shadow:0 0 0 8px rgba(139,92,246,0); } 100%{ box-shadow:0 0 0 0 rgba(139,92,246,0); } }
 .live-email-text{ display:flex; flex-direction:column; gap:3px; flex:1; min-width:0; }
 .live-email-text b{ font-size:0.85rem; color:var(--ink); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .live-email-text span{ font-size:0.76rem; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.live-email-badge{ font-family:'Space Mono'; font-size:0.64rem; color:#0a0a0e; background:var(--lime); padding:2px 8px; border-radius:100px; flex-shrink:0; animation:badgeFade 2.2s ease-in-out infinite; }
+.live-email-badge{ font-family:'Space Mono'; font-size:0.64rem; color:#ffffff; background:var(--grad-primary); padding:2px 8px; border-radius:100px; flex-shrink:0; animation:badgeFade 2.2s ease-in-out infinite; }
 @keyframes badgeFade{ 0%,100%{ opacity:1; } 50%{ opacity:0.55; } }
 
 /* Automation widget */
@@ -503,12 +545,12 @@ header.scrolled nav{ padding:13px 0; }
 .live-flow-node{ font-family:'Space Mono'; font-size:0.74rem; padding:9px 14px; border-radius:100px; border:1px solid var(--border-strong); color:var(--muted); background:var(--bg); }
 .live-flow-node.highlight{ color:var(--lime); border-color:var(--lime); }
 .live-flow-rail{ position:relative; height:2px; background:var(--border); border-radius:2px; margin:20px 0 4px; overflow:hidden; }
-.live-flow-pulse{ position:absolute; top:-3px; left:0; width:8px; height:8px; border-radius:50%; background:var(--lime); box-shadow:0 0 10px 2px rgba(182,255,63,0.6); animation:flowTravel 3s linear infinite; }
+.live-flow-pulse{ position:absolute; top:-3px; left:0; width:8px; height:8px; border-radius:50%; background:var(--lime); box-shadow:0 0 10px 2px rgba(139,92,246,0.6); animation:flowTravel 3s linear infinite; }
 @keyframes flowTravel{ 0%{ left:0%; } 100%{ left:calc(100% - 8px); } }
 
 /* Analytics widget */
 .live-bars{ display:flex; align-items:flex-end; gap:10px; height:90px; }
-.live-bars span{ flex:1; border-radius:4px 4px 0 0; background:linear-gradient(180deg, var(--lime), rgba(182,255,63,0.25)); height:var(--h); transform-origin:bottom; animation:barGrow 1.4s ease-out both; }
+.live-bars span{ flex:1; border-radius:4px 4px 0 0; background:linear-gradient(180deg, var(--lime), rgba(139,92,246,0.25)); height:var(--h); transform-origin:bottom; animation:barGrow 1.4s ease-out both; }
 .live-bars span:nth-child(1){ animation-delay:0s; }
 .live-bars span:nth-child(2){ animation-delay:0.1s; }
 .live-bars span:nth-child(3){ animation-delay:0.2s; }
@@ -556,7 +598,7 @@ header.scrolled nav{ padding:13px 0; }
 .cursor-dot, .cursor-ring{ position:fixed; top:0; left:0; pointer-events:none; z-index:9999; border-radius:50%; transform:translate(-50%,-50%); }
 .cursor-dot{ width:6px; height:6px; background:var(--lime); transition:opacity .2s ease, transform .15s ease; }
 .cursor-ring{ width:30px; height:30px; border:1px solid var(--border-strong); transition:transform .2s ease, opacity .2s ease, width .2s ease, height .2s ease, border-color .2s ease; }
-.cursor-ring.cursor-active{ width:44px; height:44px; border-color:var(--lime); background:rgba(182,255,63,0.06); }
+.cursor-ring.cursor-active{ width:44px; height:44px; border-color:var(--lime); background:rgba(139,92,246,0.06); }
 body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button{ cursor:none; }
 
 /* system-diagram sequential draw-in */
@@ -596,7 +638,7 @@ body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button{
 .cta-section{ position:relative; overflow:hidden; }
 .cta-section::before{
   content:''; position:absolute; left:50%; top:0; width:900px; height:500px; transform:translateX(-50%);
-  background:radial-gradient(circle, rgba(182,255,63,0.10), transparent 65%); pointer-events:none; z-index:-1;
+  background:radial-gradient(circle, rgba(139,92,246,0.10), transparent 65%); pointer-events:none; z-index:-1;
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -647,10 +689,6 @@ body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button{
 .belief-item:nth-child(odd){ transform:translateX(-16px); }
 .belief-item:nth-child(even){ transform:translateX(16px); }
 </style>
-<script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
-o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
-o.onload=function(){window.trackingFunctions.onLoad({appId:"6a8d5687b77026000c503117"})},
-document.head.appendChild(o)}initApollo();</script>
 </head>
 <body>
 
@@ -702,9 +740,10 @@ document.head.appendChild(o)}initApollo();</script>
         <span class="live-badge hero-enter" style="animation-delay:.05s;"><span class="pulse-dot"></span>Building live systems for real businesses</span>
         <h1 class="hero-title hero-enter" style="animation-delay:.15s;">Your website<br><span class="line2 gradient-text">shouldn't</span> go quiet<br>after <span class="line3">"thanks!"</span></h1>
         <p class="hero-sub hero-enter" style="animation-delay:.3s;">Nirmaviyo builds the site, writes the emails, and wires an automation between them — so every visitor keeps hearing from you, without you lifting a finger.</p>
-        <div class="hero-actions hero-enter" style="animation-delay:.42s;">
-          <a href="#" data-nav="start" onclick="showPage('start');return false;" class="btn-lime">Start a project</a>
-          <a href="#" data-nav="services" onclick="showPage('services');return false;" class="btn-ghost">What we build</a>
+        <div class="hero-actions hero-enter" style="animation-delay:.42s; flex-direction:column; align-items:flex-start; gap:14px;">
+          <a href="#" data-nav="review" onclick="showPage('review');return false;" class="btn-lime btn-primary-cta">Get Your Free Website Growth Review →</a>
+          <span class="hero-cta-sub">Find out what's stopping your website from converting visitors into enquiries.</span>
+          <a href="#" data-nav="start" onclick="showPage('start');return false;" class="btn-ghost" style="margin-top:6px;">Start a project</a>
         </div>
         <div class="hero-stats hero-enter" style="animation-delay:.54s;">
           <div class="hero-stat"><b>4</b><span>Connected disciplines</span></div>
@@ -733,6 +772,41 @@ document.head.appendChild(o)}initApollo();</script>
       <span>Scroll</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14M6 13l6 6 6-6"/></svg>
     </a>
+  </section>
+
+  <!-- HOW THE FREE REVIEW WORKS (home teaser) -->
+  <section class="section section-tight" id="how-review-works-home">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="section-eyebrow">How your free review works</span>
+        <h2 class="section-title">Four steps to know exactly what's holding your site back.</h2>
+      </div>
+      <div class="steps-wrap">
+        <div class="step">
+          <span class="step-num">01</span>
+          <h4>Submit your website</h4>
+          <p>Share your website and a few details about your business.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <h4>We analyse it</h4>
+          <p>We review your design, user experience, mobile experience and conversion opportunities.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <h4>Get your personalised insights</h4>
+          <p>We'll send you the key areas where your website could improve.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">04</span>
+          <h4>Decide what's next</h4>
+          <p>If you'd like our help implementing the improvements, we'll discuss the right solution.</p>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:36px;">
+        <a href="#" data-nav="review" onclick="showPage('review');return false;" class="btn-lime">Get My Free Website Review →</a>
+      </div>
+    </div>
   </section>
 
   <section class="stats-bar">
@@ -950,7 +1024,7 @@ document.head.appendChild(o)}initApollo();</script>
   <section class="section" id="steps">
     <div class="wrap">
       <div class="section-head">
-        <span class="section-eyebrow">How it works</span>
+        <span class="section-eyebrow">The connected system</span>
         <h2 class="section-title">One visitor, four automatic moves</h2>
         <p class="section-desc">A real flow we build — from first click to a sales rep who's already in the loop.</p>
       </div>
@@ -1005,6 +1079,82 @@ document.head.appendChild(o)}initApollo();</script>
         <span class="section-eyebrow">About</span>
         <h2 class="section-title">We build digital experiences that help businesses look better, communicate better, and convert better.</h2>
         <a href="#" data-nav="about" onclick="showPage('about');return false;" class="btn-ghost" style="margin-top:10px; display:inline-block;">Meet Nirmaviyo →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="section" id="why-choose-us">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="section-eyebrow">Why choose us</span>
+        <h2 class="section-title">The difference isn't the tools. It's how they're put together.</h2>
+        <p class="section-desc">Most businesses don't have a website problem. They have a disconnected-vendor problem.</p>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card compare-before">
+          <span class="compare-label mono">MOST AGENCIES</span>
+          <div class="compare-row"><span class="compare-x">✕</span>3 vendors: web dev, email tool, ad agency</div>
+          <div class="compare-row"><span class="compare-x">✕</span>Nobody owns the full customer journey</div>
+          <div class="compare-row"><span class="compare-x">✕</span>Leads fall through the gaps between tools</div>
+          <div class="compare-row"><span class="compare-x">✕</span>You're the one connecting everything manually</div>
+        </div>
+        <div class="compare-card compare-after">
+          <span class="compare-label mono">NIRMAVIYO</span>
+          <div class="compare-row"><span class="compare-check">✓</span>1 team for website, email, and automation</div>
+          <div class="compare-row"><span class="compare-check">✓</span>One system, built and owned end-to-end</div>
+          <div class="compare-row"><span class="compare-check">✓</span>Every lead automatically followed up on</div>
+          <div class="compare-row"><span class="compare-check">✓</span>It keeps working after we hand it over</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-tight" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-eyebrow">FAQ</span>
+        <h2 class="section-title">Questions people usually ask</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>How much does a website cost?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer"><p>Every project is different, depending on features and requirements. Tell us what you need on the Start a Project page and we'll give you a clear estimate.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>How long does a website take?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer"><p>Most projects can be completed within a few weeks, depending on scope.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Do you redesign existing websites?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer"><p>Yes — we can redesign outdated websites to improve design, performance and conversions.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Do you only work with large businesses?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer"><p>No, we work with businesses at different stages.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Can I hire you only for email marketing?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer"><p>Yes. You can choose one service or build a complete connected system.</p></div>
+        </div>
       </div>
     </div>
   </section>
@@ -1438,6 +1588,127 @@ document.head.appendChild(o)}initApollo();</script>
   </section>
 
 </div>
+<div class="page" id="page-review" style="display:none;">
+
+  <!-- HERO -->
+  <section class="hero" style="padding-bottom:10px;">
+    <div class="wrap">
+      <span class="page-eyebrow">Free Website Review</span>
+      <h1 class="hero-title" style="max-width:16ch;">Get Your Free <span class="line2 gradient-text">Website Review</span></h1>
+      <p class="hero-sub">We'll review your website and identify opportunities to improve its design, user experience, performance and conversion potential.</p>
+      <div class="chip-grid">
+        <span class="chip">Design</span>
+        <span class="chip">User Experience</span>
+        <span class="chip">Performance</span>
+        <span class="chip">Conversion Potential</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW THE FREE REVIEW WORKS -->
+  <section class="section section-tight" id="how-review-works">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="section-eyebrow">How your free review works</span>
+        <h2 class="section-title">Four steps to know exactly what's holding your site back.</h2>
+      </div>
+      <div class="steps-wrap">
+        <div class="step">
+          <span class="step-num">01</span>
+          <h4>Submit your website</h4>
+          <p>Share your website and a few details about your business.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <h4>We analyse it</h4>
+          <p>We review your design, user experience, mobile experience and conversion opportunities.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <h4>Get your personalised insights</h4>
+          <p>We'll send you the key areas where your website could improve.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">04</span>
+          <h4>Decide what's next</h4>
+          <p>If you'd like our help implementing the improvements, we'll discuss the right solution.</p>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:36px;">
+        <a href="#review-form-section" class="btn-lime" onclick="document.getElementById('review-form-section').scrollIntoView({behavior:'smooth'}); return false;">Get My Free Website Review →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="section section-tight" id="review-form-section">
+    <div class="wrap">
+      <div class="form-layout">
+
+        <div class="form-side">
+          <h3>What you'll get back.</h3>
+          <p>A personal, no-obligation look at what's holding your site back from converting more visitors into real enquiries.</p>
+          <ul class="mini-steps">
+            <li><b class="mono">01</b><span>We review your website</span></li>
+            <li><b class="mono">02</b><span>We identify what's costing you conversions</span></li>
+            <li><b class="mono">03</b><span>We send it straight to your WhatsApp/email</span></li>
+            <li><b class="mono">04</b><span>No obligation, no sales pressure</span></li>
+          </ul>
+        </div>
+
+        <div class="form-card">
+          <form id="review-form" action="https://formsubmit.co/ajax/nirmaviyo@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="New Free Website Review Request — Nirmaviyo">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+            <div class="form-section">
+              <div class="field">
+                <label for="review-name">Name *</label>
+                <input type="text" id="review-name" name="name" placeholder="Enter your name" required>
+              </div>
+              <div class="field">
+                <label for="review-business">Business Name *</label>
+                <input type="text" id="review-business" name="business-name" placeholder="Enter your business name" required>
+              </div>
+              <div class="field">
+                <label for="review-website">Website URL *</label>
+                <input type="url" id="review-website" name="website-url" placeholder="https://yourwebsite.com" required>
+              </div>
+              <div class="field">
+                <label for="review-email">Email *</label>
+                <input type="email" id="review-email" name="email" placeholder="Enter your email address" required>
+              </div>
+              <div class="field">
+                <label for="review-whatsapp">WhatsApp Number *</label>
+                <input type="text" id="review-whatsapp" name="whatsapp-number" placeholder="Enter your WhatsApp number" required>
+              </div>
+            </div>
+
+            <div class="form-submit-row">
+              <button type="submit" class="btn-lime">Get My Free Review →</button>
+              <p class="form-fine-print">By submitting this form, you agree that Nirmaviyo may contact you regarding your free website review.</p>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-section" id="contact-review">
+    <div class="wrap">
+      <h2>Prefer to just <span class="hl">start the project?</span></h2>
+      <p>If you already know what you need, skip the review and tell us about your project directly.</p>
+      <div class="cta-actions">
+        <a href="#" data-nav="start" onclick="showPage('start');return false;" class="btn-lime">Start a project →</a>
+      </div>
+    </div>
+  </section>
+
+</div>
 <div class="page" id="page-start" style="display:none;">
 
   <!-- HERO -->
@@ -1651,6 +1922,7 @@ document.head.appendChild(o)}initApollo();</script>
     work: "Work — Nirmaviyo",
     about: "About — Nirmaviyo",
     start: "Start a Project — Nirmaviyo",
+    review: "Free Website Review — Nirmaviyo",
     case: "Aavira Skin Case Study — Nirmaviyo"
   };
   var VALID_PAGES = Object.keys(PAGE_TITLES);
@@ -1717,7 +1989,7 @@ document.head.appendChild(o)}initApollo();</script>
   var revealObserver = null;
   function initReveal(scope){
     scope = scope || document;
-    var selectors = '.section-head, .card, .step, .work-card, .option-card, .belief-item, .founder-card, .focus-panel, .system-panel, .stat-block, .form-side, .form-card, .chip-grid, .preview-panel, .feature-row, .live-visual';
+    var selectors = '.section-head, .card, .step, .work-card, .option-card, .belief-item, .founder-card, .focus-panel, .system-panel, .stat-block, .form-side, .form-card, .chip-grid, .preview-panel, .feature-row, .live-visual, .compare-card, .faq-item';
     var els = scope.querySelectorAll(selectors);
     els.forEach(function(el, i){
       if(!el.classList.contains('reveal')){
@@ -1834,6 +2106,18 @@ document.head.appendChild(o)}initApollo();</script>
       });
     }
     attachTilt(document);
+
+    // ---- FAQ accordion ----
+    document.querySelectorAll('.faq-question').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var item = btn.closest('.faq-item');
+        var wasOpen = item.classList.contains('open');
+        item.parentElement.querySelectorAll('.faq-item.open').forEach(function(openItem){
+          openItem.classList.remove('open');
+        });
+        if(!wasOpen){ item.classList.add('open'); }
+      });
+    });
 
     // ---- pledge line: word-by-word reveal on scroll ----
     (function(){
@@ -2129,6 +2413,59 @@ document.head.appendChild(o)}initApollo();</script>
             errBox.style.marginTop = '14px';
             errBox.style.fontSize = '0.86rem';
             form.querySelector('.form-submit-row').appendChild(errBox);
+          }
+          errBox.textContent = "Something went wrong sending this — please email us directly at nirmaviyo@gmail.com, or try again.";
+        });
+      });
+    }
+
+    // ---- Free Website Review form (simple version of the pattern above) ----
+    var reviewForm = document.getElementById('review-form');
+    if(reviewForm){
+      reviewForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        var submitBtn = reviewForm.querySelector('button[type="submit"]');
+        var nameVal = document.getElementById('review-name').value || 'there';
+        var card = reviewForm.closest('.form-card');
+
+        if(submitBtn){
+          submitBtn.textContent = 'Sending...';
+          submitBtn.disabled = true;
+          submitBtn.style.opacity = '0.7';
+        }
+
+        var formData = new FormData(reviewForm);
+
+        fetch(reviewForm.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData
+        })
+        .then(function(response){
+          if(!response.ok){ throw new Error('Request failed'); }
+          return response.json();
+        })
+        .then(function(){
+          card.innerHTML = '<div style="text-align:center; padding:40px 10px;">'
+            + '<h3 style="margin-bottom:14px;">Thanks, ' + nameVal.split(' ')[0] + ' — got it. \u2705</h3>'
+            + '<p style="color:var(--muted); line-height:1.6; max-width:44ch; margin:0 auto 24px;">We\u2019ll review your website and get back to you on WhatsApp or email with what\u2019s costing you conversions.</p>'
+            + '<a href="#home" onclick="showPage(\'home\');return false;" class="btn-ghost">Back to home →</a>'
+            + '</div>';
+        })
+        .catch(function(){
+          if(submitBtn){
+            submitBtn.textContent = 'Get My Free Review →';
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+          }
+          var errBox = reviewForm.querySelector('.form-error-msg');
+          if(!errBox){
+            errBox = document.createElement('p');
+            errBox.className = 'form-error-msg';
+            errBox.style.color = 'var(--coral)';
+            errBox.style.marginTop = '14px';
+            errBox.style.fontSize = '0.86rem';
+            reviewForm.querySelector('.form-submit-row').appendChild(errBox);
           }
           errBox.textContent = "Something went wrong sending this — please email us directly at nirmaviyo@gmail.com, or try again.";
         });
